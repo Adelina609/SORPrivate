@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MVPAndroidProject</string>
+    <string name="server_questions_error">Can\'t load questions</string>
+    <string name="server_questions_success">Events loaded</string>
+    <string name="paginationPreferences">Pagination</string>
+    <string name="label_dialog">Pagination</string>
+    <string name="label_type_your_pagination">type your paginationPreferences</string>
+    <string name="label_submit">Submit</string>
+    <string name="label_cancel">Cancel</string>
+    <string name="links">Links</string>
+    <string name="none">none</string>
+    <string name="img_error">image</string>
+    <string name="send">Send</string>
+    <string name="title">The problem briefly</string>
+    <string name="describe_the_problem">Describe the problem</string>
+</resources>
