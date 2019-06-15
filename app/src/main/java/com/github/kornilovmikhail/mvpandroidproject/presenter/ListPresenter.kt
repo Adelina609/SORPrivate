@@ -13,10 +13,6 @@ import ru.terrakok.cicerone.Router
 class ListPresenter(private val questionsRepo: QuestionsRepo, private val router: Router) :
     MvpPresenter<ListView>() {
 
-    companion object {
-        private const val offsetDefault = 0
-    }
-
     fun getQuestions(offset: Int) {
         questionsRepo.getQuestions(offset)
             .doOnSubscribe {
@@ -50,4 +46,9 @@ class ListPresenter(private val questionsRepo: QuestionsRepo, private val router
     fun setSharedPrefs(value: Int) = questionsRepo.setCurrentPagination(value)
 
     fun questionClick(position: Int) = router.navigateTo(Screens.DetailScreen(position))
+
+    companion object {
+        private const val offsetDefault = 0
+    }
+
 }

@@ -12,7 +12,7 @@ import io.reactivex.Single
 @Dao
 interface QuestionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertQuestions(events: List<Question>)
+    fun insertQuestions(questions: List<Question>)
 
     @Query("SELECT * FROM questions")
     fun getQuestions(): Single<List<Question>>

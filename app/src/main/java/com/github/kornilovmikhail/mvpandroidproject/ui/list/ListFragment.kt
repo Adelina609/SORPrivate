@@ -35,7 +35,6 @@ class ListFragment : MvpAppCompatFragment(), ListView {
             .build()
             .inject(this)
         super.onCreate(savedInstanceState)
-        //setHasOptionsMenu(true)
     }
 
     override fun onCreateView(

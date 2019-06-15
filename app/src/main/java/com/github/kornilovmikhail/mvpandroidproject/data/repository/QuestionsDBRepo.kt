@@ -1,5 +1,6 @@
 package com.github.kornilovmikhail.mvpandroidproject.data.repository
 
+import com.github.kornilovmikhail.mvpandroidproject.data.entity.Answer
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Question
 import com.github.kornilovmikhail.mvpandroidproject.data.local.dao.QuestionDao
 import io.reactivex.Completable

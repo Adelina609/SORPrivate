@@ -32,4 +32,28 @@ class Answer(
     override fun toString(): String {
         return "$id,$answer,$email,$likes,$dislikes,$question_id;"
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Answer
+
+        if (id != other.id) return false
+        if (answer != other.answer) return false
+        if (email != other.email) return false
+        if (question_id != other.question_id) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = id
+        result = 31 * result + answer.hashCode()
+        result = 31 * result + email.hashCode()
+        result = 31 * result + question_id
+        return result
+    }
+
+
 }

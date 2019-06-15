@@ -1,11 +1,9 @@
 package com.github.kornilovmikhail.mvpandroidproject.di.event.module
 
+import com.github.kornilovmikhail.mvpandroidproject.data.local.dao.AnswerDao
 import com.github.kornilovmikhail.mvpandroidproject.data.local.dao.QuestionDao
 import com.github.kornilovmikhail.mvpandroidproject.data.network.SorApi
-import com.github.kornilovmikhail.mvpandroidproject.data.repository.PaginationPreferencesRepo
-import com.github.kornilovmikhail.mvpandroidproject.data.repository.QuestionsDBRepo
-import com.github.kornilovmikhail.mvpandroidproject.data.repository.QuestionsNetworkRepo
-import com.github.kornilovmikhail.mvpandroidproject.data.repository.QuestionsRepo
+import com.github.kornilovmikhail.mvpandroidproject.data.repository.*
 import com.github.kornilovmikhail.mvpandroidproject.di.event.scope.QuestionScope
 
 import dagger.Module
@@ -18,7 +16,9 @@ class QuestionModule {
     fun provideQuestionsRepo(
         questionsDBRepo: QuestionsDBRepo,
         questionsNetworkRepo: QuestionsNetworkRepo
-    ): QuestionsRepo = QuestionsRepo(questionsDBRepo, questionsNetworkRepo, providePagination())
+    ): QuestionsRepo = QuestionsRepo(questionsDBRepo, questionsNetworkRepo,
+        providePagination())
+        //, answersDBRepo)
 
     @Provides
     @QuestionScope
@@ -33,4 +33,8 @@ class QuestionModule {
     @Provides
     @QuestionScope
     fun provideQuestionsDBRepo(questionDao: QuestionDao): QuestionsDBRepo = QuestionsDBRepo(questionDao)
+
+//    @Provides
+//    @QuestionScope
+//    fun provideAnswersDBRepo(answerDao: AnswerDao): AnswersDBRepo = AnswersDBRepo(answerDao)
 }

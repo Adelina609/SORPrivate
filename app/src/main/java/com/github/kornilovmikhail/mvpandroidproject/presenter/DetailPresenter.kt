@@ -1,5 +1,6 @@
 package com.github.kornilovmikhail.mvpandroidproject.presenter
 
+import android.annotation.SuppressLint
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.github.kornilovmikhail.mvpandroidproject.data.repository.QuestionsRepo
@@ -27,6 +28,40 @@ class DetailPresenter(private val questionsRepo: QuestionsRepo, private val rout
                 }
             )
     }
+
+//    @SuppressLint("CheckResult")
+//
+//    fun getAnswers(offset: Int) {
+//        questionsRepo.getAnswers(offset)
+//            .doOnSubscribe {
+//                viewState.showProgressBar()
+//            }
+//            .doAfterTerminate {
+//                viewState.hideProgressBar()
+//            }
+//            .subscribeBy(
+//                onSuccess = {
+//                    if (it.isEmpty()) {
+//                        if (offset != offsetDefault) {
+//                            println("**************************"+ "IS EMPTY")
+//                            viewState.detachOnScrollListeners()
+//                        }
+//                    } else {
+//                        questionsRepo.cacheAnswers(it)
+//                        viewState.displayAnswers(it)
+//                        viewState.displaySuccess()
+//                    }
+//                },
+//                onError = {
+//                    println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"+it.message)
+//                    viewState.displayError()
+//                }
+//            )
+//    }
+//
+//    companion object {
+//        private const val offsetDefault = 0
+//    }
 
 //    fun onIconClicked(position: Int) {
 //        router.navigateTo(Screens.LinksScreen(position))

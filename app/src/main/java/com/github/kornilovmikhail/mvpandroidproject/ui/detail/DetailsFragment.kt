@@ -4,17 +4,23 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.github.kornilovmikhail.mvpandroidproject.App
 import com.github.kornilovmikhail.mvpandroidproject.R
+import com.github.kornilovmikhail.mvpandroidproject.data.entity.Answer
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Question
 import com.github.kornilovmikhail.mvpandroidproject.di.event.component.DaggerQuestionComponent
 import com.github.kornilovmikhail.mvpandroidproject.di.event.module.PresenterModule
 import com.github.kornilovmikhail.mvpandroidproject.di.event.module.QuestionModule
 import com.github.kornilovmikhail.mvpandroidproject.presenter.DetailPresenter
+import com.github.kornilovmikhail.mvpandroidproject.presenter.ListPresenter
+import com.github.kornilovmikhail.mvpandroidproject.ui.list.OnScrollListener
+import com.github.kornilovmikhail.mvpandroidproject.ui.list.QuestionAdapter
 import kotlinx.android.synthetic.main.fragment_details.*
+import kotlinx.android.synthetic.main.fragment_list.*
 import javax.inject.Inject
 
 class DetailsFragment : MvpAppCompatFragment(), DetailView {
@@ -56,6 +62,28 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView {
 //        return true
 //    }
 
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        setupViews()
+//        detailPresenter.getAnswers(0)
+//    }
+//
+//    private fun setupViews() {
+//        rv_answers.layoutManager = LinearLayoutManager(context)
+//        rv_answers.addOnScrollListener(OnScrollListener(
+//            rv_answers.layoutManager as LinearLayoutManager
+//        ) {
+//            detailPresenter.getAnswers(it)
+//        })
+//    }
+//
+//    override fun displayAnswers(answers : List<Answer>){
+//        if(rv_answers.adapter == null){
+//            rv_answers.adapter = AnswerAdapter(answers){}
+//        }
+//        (rv_answers.adapter as AnswerAdapter).submitList(answers)
+//    }
+
     override fun displayQuestion(question: Question) {
         tv_title_details_activity.text = question.title
         tv_details_details_activity.text = question.description
@@ -72,6 +100,12 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView {
     override fun hideProgressBar() {
         details_progressBar.visibility = ProgressBar.INVISIBLE
     }
+
+    override fun displaySuccess() {
+        Toast.makeText(context, getString(R.string.server_questions_success), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun detachOnScrollListeners() = rv_questions.clearOnScrollListeners()
 
     companion object {
         private const val DEFAULT_POSITION = 0

@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 class DataNetModule {
     companion object {
-        private const val BASE_URL = "http://17423d6e.ngrok.io/"
+        private const val BASE_URL = "http://2d315a27.ngrok.io/"
     }
 
     @Provides
