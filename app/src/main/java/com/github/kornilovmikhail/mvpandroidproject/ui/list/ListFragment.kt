@@ -15,6 +15,7 @@ import com.github.kornilovmikhail.mvpandroidproject.di.event.component.DaggerQue
 import com.github.kornilovmikhail.mvpandroidproject.di.event.module.PresenterModule
 import com.github.kornilovmikhail.mvpandroidproject.di.event.module.QuestionModule
 import com.github.kornilovmikhail.mvpandroidproject.presenter.ListPresenter
+import kotlinx.android.synthetic.main.fragment_add_new_question.*
 import kotlinx.android.synthetic.main.fragment_list.*
 import javax.inject.Inject
 
@@ -48,12 +49,19 @@ class ListFragment : MvpAppCompatFragment(), ListView {
         listPresenter.getQuestions(0)
     }
 
+    private fun onBtnClick(){
+        listPresenter.onBtnClick()
+    }
+
     private fun setupViews() {
         rv_questions.layoutManager = LinearLayoutManager(context)
         rv_questions.addOnScrollListener(OnScrollListener(
             rv_questions.layoutManager as LinearLayoutManager
         ) {
             listPresenter.getQuestions(it)
+        })
+        fab_fr_list.setOnClickListener(View.OnClickListener {
+            onBtnClick()
         })
     }
 

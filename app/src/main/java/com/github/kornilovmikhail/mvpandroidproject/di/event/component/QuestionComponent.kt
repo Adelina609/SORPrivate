@@ -9,6 +9,7 @@ import com.github.kornilovmikhail.mvpandroidproject.di.event.scope.AnswerScope
 import com.github.kornilovmikhail.mvpandroidproject.ui.MainActivity
 import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailsFragment
 import com.github.kornilovmikhail.mvpandroidproject.ui.list.ListFragment
+import com.github.kornilovmikhail.mvpandroidproject.ui.new_question.NewQuestionFragment
 
 import dagger.Component
 
@@ -24,6 +25,8 @@ interface QuestionComponent {
     fun inject(listFragment: ListFragment)
 
     fun inject(detailsFragment: DetailsFragment)
+
+    fun inject(newQuestionFragment: NewQuestionFragment)
 
 //    fun inject(linksFragment: LinksFragment)
 }

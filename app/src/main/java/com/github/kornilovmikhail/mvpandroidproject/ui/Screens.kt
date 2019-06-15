@@ -3,6 +3,7 @@ package com.github.kornilovmikhail.mvpandroidproject.ui
 import androidx.fragment.app.Fragment
 import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailsFragment
 import com.github.kornilovmikhail.mvpandroidproject.ui.list.ListFragment
+import com.github.kornilovmikhail.mvpandroidproject.ui.new_question.NewQuestionFragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 class Screens {
@@ -11,11 +12,16 @@ class Screens {
         override fun getFragment(): Fragment = ListFragment.getInstance()
     }
 
-    class DetailScreen(private val position: Int) : SupportAppScreen() {
+    class DetailScreen(private val position: Long) : SupportAppScreen() {
         override fun getFragment(): Fragment = DetailsFragment.getInstance(position)
     }
 
 //    class LinksScreen(private val position: Int) : SupportAppScreen() {
 //        override fun getFragment(): Fragment = LinksFragment.getInstance(position)
 //    }
+
+    class NewQuestionScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment = NewQuestionFragment.getInstance()
+
+    }
 }

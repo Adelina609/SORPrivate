@@ -15,6 +15,10 @@ class QuestionsRepo(
         private var isFirst = true
     }
 
+    fun getQuestion(id : Long) : Single<Question> =
+        getQuestionByIDFromNetw(id)
+
+
     fun getQuestions(offset: Int): Single<List<Question>> {
         if (isFirst) {
             isFirst = false
@@ -50,6 +54,15 @@ class QuestionsRepo(
 
     private fun getQuestionsFromNetwork(offset: Int): Single<List<Question>> =
         questionsNetworkRepo.getQuestions()
+
+    private fun getQuestionByIDFromNetw(id : Long) : Single<Question> =
+            questionsNetworkRepo.getQuestionById(id)
+
+    fun postNewQuestion(question :Question) =
+        questionsNetworkRepo.addNewQuestion(question)
+
+    fun getNewEmptyQuestion() : Single<Question> =
+    questionsNetworkRepo.getNewEmptyQuestion()
 
 //    private fun getAnswersFromNetwork(offset: Int) : Single<List<Answer>> =
 //        questionsNetworkRepo.getAnswers()

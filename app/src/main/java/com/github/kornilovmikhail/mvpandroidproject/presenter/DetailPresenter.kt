@@ -4,17 +4,19 @@ import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.github.kornilovmikhail.mvpandroidproject.data.repository.AnswersRepo
 import com.github.kornilovmikhail.mvpandroidproject.data.repository.QuestionsRepo
+import com.github.kornilovmikhail.mvpandroidproject.ui.Screens
 import com.github.kornilovmikhail.mvpandroidproject.ui.detail.DetailView
 import io.reactivex.rxkotlin.subscribeBy
 import ru.terrakok.cicerone.Router
+import java.lang.Thread.sleep
 
 @InjectViewState
 class DetailPresenter(private val questionsRepo: QuestionsRepo, private val router: Router,
                       private val answersRepo: AnswersRepo) : MvpPresenter<DetailView>() {
 
     var qId : Long = 0
-    fun getQuestion(position: Int) {
-        questionsRepo.getQuestions(0)
+    fun getQuestion(id: Long) {
+        questionsRepo.getQuestion(id)
             .doOnSubscribe {
                 viewState.showProgressBar()
             }
@@ -23,8 +25,10 @@ class DetailPresenter(private val questionsRepo: QuestionsRepo, private val rout
             }
             .subscribeBy(
                 onSuccess = {
-                    qId = it[position].id + 0L
-                    viewState.displayQuestion(it[position])
+//                    qId = it[id].id + 0L
+//                    println("-------------------------------------------------------- " + qId)
+                    viewState.displayQuestion(it)
+                    //getAnswers(0)
                 },
                 onError =
                 {
@@ -33,8 +37,12 @@ class DetailPresenter(private val questionsRepo: QuestionsRepo, private val rout
             )
     }
 
-    fun getAnswers(offset: Int) {
-        answersRepo.getAnswers(offset, qId)
+    fun getAnswers(offset: Int, id : Long) {
+        println()
+        println("000000000000000000000000 IN DETPRES getAnswers()   " + id)
+//        println()
+//        println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + qId)
+        answersRepo.getAnswers(offset, id)
             .doOnSubscribe {
                 viewState.showProgressBar()
             }
@@ -50,23 +58,26 @@ class DetailPresenter(private val questionsRepo: QuestionsRepo, private val rout
                         }
                     } else {
                         println("&&&&&&&&&&&&&&&&&&&&&&&& IN getAnswers")
-                        answersRepo.cacheAnswers(it)
+                        //answersRepo.cacheAnswers(it)
                         viewState.displayAnswers(it)
                         viewState.displaySuccess()
                     }
                 },
                 onError = {
                     println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"+it.message)
+                    println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + qId)
                     viewState.displayError()
                 }
             )
     }
 
+    fun onBackPressed() = router.newRootScreen(Screens.ListScreen())
+
     companion object {
         private const val offsetDefault = 0
     }
 
-//    fun onIconClicked(position: Int) {
-//        router.navigateTo(Screens.LinksScreen(position))
+//    fun onIconClicked(id: Int) {
+//        router.navigateTo(Screens.LinksScreen(id))
 //    }
 }

@@ -22,8 +22,9 @@ class AnswersRepo(
         return getAnswersFromDB()
     }
 
-    private fun getAnswersFromNetwork(offset: Int, id: Long): Single<List<Answer>> =
-        answersNetworkRepo.getAnswers(id)
+    private fun getAnswersFromNetwork(offset: Int, id: Long): Single<List<Answer>> {
+        return answersNetworkRepo.getAnswers(id)
+    }
 
     private fun getAnswersFromDB(): Single<List<Answer>> = answersDBRepo.getAnswers()
 

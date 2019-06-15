@@ -9,6 +9,7 @@ import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.github.kornilovmikhail.mvpandroidproject.App
+import com.github.kornilovmikhail.mvpandroidproject.IOnBackPressed
 import com.github.kornilovmikhail.mvpandroidproject.R
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Answer
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Question
@@ -22,12 +23,12 @@ import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.android.synthetic.main.fragment_list.*
 import javax.inject.Inject
 
-class DetailsFragment : MvpAppCompatFragment(), DetailView {
+class DetailsFragment : MvpAppCompatFragment(), DetailView{
     @Inject
     @InjectPresenter
     lateinit var detailPresenter: DetailPresenter
 
-    private var position = 0
+    private var idQuestion = 0L
 
     @ProvidePresenter
     fun getPresenter(): DetailPresenter = detailPresenter
@@ -41,9 +42,9 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView {
             .build()
             .inject(this)
         super.onCreate(savedInstanceState)
-        position = arguments?.getInt(EXTRA_POSITION) ?: DEFAULT_POSITION
+        idQuestion = arguments?.getLong(EXTRA_ID) ?: DEFAULT_ID
+        //detailPresenter.getQuestion(idQuestion)
         //setHasOptionsMenu(true)
-        detailPresenter.getQuestion(position)
     }
 
     override fun onCreateView(
@@ -57,8 +58,11 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        detailPresenter.getQuestion(idQuestion)
         setupViews()
-        detailPresenter.getAnswers(0)
+        println()
+        println("000000000000000000000000 IN DETFRAG1   " + idQuestion)
+        detailPresenter.getAnswers(0, idQuestion)
     }
 
     private fun setupViews() {
@@ -66,9 +70,13 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView {
         rv_answers.addOnScrollListener(OnScrollListener(
             rv_answers.layoutManager as LinearLayoutManager
         ) {
-            detailPresenter.getAnswers(it)
+            println()
+            println("000000000000000000000000 IN DETFRAG2   " + idQuestion)
+            detailPresenter.getAnswers(it, idQuestion)
         })
     }
+
+
 
     override fun displayAnswers(listAnswer: List<Answer>) {
         if (rv_answers.adapter == null) {
@@ -101,15 +109,20 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView {
     override fun detachOnScrollListeners() = rv_questions.clearOnScrollListeners()
 
     companion object {
-        private const val DEFAULT_POSITION = 0
-        private const val EXTRA_POSITION = "POSITION"
+        private const val DEFAULT_ID = 0L
+        private const val EXTRA_ID = "POSITION"
 
-        fun getInstance(position: Int): DetailsFragment {
+        fun getInstance(id: Long): DetailsFragment {
             val detailsFragment = DetailsFragment()
             val args = Bundle()
-            args.putInt(EXTRA_POSITION, position)
+            args.putLong(EXTRA_ID, id)
             detailsFragment.arguments = args
             return detailsFragment
         }
     }
+
+//    override fun onBackPressed(): Boolean {
+//        detailPresenter.onBackPressed()
+//        return true
+//    }
 }

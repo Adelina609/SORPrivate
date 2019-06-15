@@ -29,4 +29,15 @@
             android:layout_marginTop="24dp" app:layout_constraintTop_toBottomOf="@+id/et_describe_fr_add_q"
             app:layout_constraintStart_toStartOf="@+id/et_describe_fr_add_q" android:layout_marginStart="144dp"
     />
+
+    <ProgressBar
+            android:id="@+id/fr_add_new_q_progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

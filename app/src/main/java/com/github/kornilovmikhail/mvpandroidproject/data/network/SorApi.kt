@@ -3,19 +3,28 @@ package com.github.kornilovmikhail.mvpandroidproject.data.network
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Answer
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Question
 import io.reactivex.Single
-import retrofit2.http.GET
+import retrofit2.http.*
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
-import retrofit2.http.Path
+
+
 
 interface SorApi {
     @GET("questions")
     fun loadQuestions(): Single<List<Question>>
 
-    @GET("questions/{id}/answers")
+    @GET("questions/{id}")
+    fun getQuestionById(@Path("id") id : Long) : Single<Question>
+
+    @GET("questions/{id}/answer")
     fun loadAnswers(@Path("id") id : Long): Single<List<Answer>>
 
+    @GET("questionsg")
+    fun getNewEmptyQuestion() : Single<Question>
+
     @POST("questions")
-    fun addQuestion(question: Question)
+    //@FormUrlEncoded
+    fun addQuestion(@Body question: Question): Single<Question>
 
     @POST("answers")
     fun addAnswer(answer: Answer)

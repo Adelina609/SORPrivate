@@ -14,9 +14,10 @@ class AnswersDBRepo(private val answerDao: AnswerDao) {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 
-    fun saveAnswers(answers: List<Answer>): Completable =
-        Completable.fromAction {
+    fun saveAnswers(answers: List<Answer>): Completable {
+        return Completable.fromAction {
             answerDao.insertAnswers(answers)
         }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+    }
 }

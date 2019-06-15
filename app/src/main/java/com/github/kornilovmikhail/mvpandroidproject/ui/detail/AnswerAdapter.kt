@@ -32,8 +32,8 @@ class AnswerAdapter(
     }
 
     override fun submitList(list: List<Answer>?) {
-        println("))))))))))))))))))))))))))))) I'm in adapter ANSWER!!!!!!!")
         super.submitList(if (list != null) ArrayList(list) else null)
+        println("))))))))))))))))))))))))))))) I'm in adapter ANSWER!!!!!!!" + (list != null))
     }
 
     class AnswerDiffCallback : DiffUtil.ItemCallback<Answer>() {

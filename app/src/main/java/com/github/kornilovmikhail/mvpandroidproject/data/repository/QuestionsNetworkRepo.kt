@@ -13,4 +13,22 @@ class QuestionsNetworkRepo(private val sorApi: SorApi) {
             .loadQuestions()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+
+    fun getNewEmptyQuestion() : Single<Question> =
+            sorApi
+                .getNewEmptyQuestion()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+
+    fun addNewQuestion(question: Question) =
+        sorApi
+            .addQuestion(question)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
+    fun getQuestionById(id : Long) =
+            sorApi
+                .getQuestionById(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
 }

@@ -3,6 +3,7 @@ package com.github.kornilovmikhail.mvpandroidproject.presenter
 import android.content.SharedPreferences
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.github.kornilovmikhail.mvpandroidproject.data.entity.Question
 import com.github.kornilovmikhail.mvpandroidproject.data.repository.QuestionsRepo
 import com.github.kornilovmikhail.mvpandroidproject.ui.Screens
 import com.github.kornilovmikhail.mvpandroidproject.ui.list.ListView
@@ -25,27 +26,38 @@ class ListPresenter(private val questionsRepo: QuestionsRepo, private val router
                 onSuccess = {
                     if (it.isEmpty()) {
                         if (offset != offsetDefault) {
-                            println("**************************"+ "IS EMPTY")
+                            println("**************************" + "IS EMPTY")
                             viewState.detachOnScrollListeners()
                         }
                     } else {
-                        questionsRepo.cacheQuestions(it)
+                        //questionsRepo.cacheQuestions(it)
                         viewState.displayQuestions(it)
                         viewState.displaySuccess()
                     }
                 },
                 onError = {
-                    println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"+it.message)
+                    println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" + it.message)
                     viewState.displayError()
                 }
             )
     }
 
-    fun initSharedPreferences(sharedPreferences: SharedPreferences) = questionsRepo.setSharedPreferences(sharedPreferences)
+    fun initSharedPreferences(sharedPreferences: SharedPreferences) =
+        questionsRepo.setSharedPreferences(sharedPreferences)
 
     fun setSharedPrefs(value: Int) = questionsRepo.setCurrentPagination(value)
 
-    fun questionClick(position: Int) = router.navigateTo(Screens.DetailScreen(position))
+//    fun addNewQuestionButtonClick(title : String, description : String, email : String) {
+//        questionsRepo.postNewQuestion(title, description, email)
+//        router.navigateTo(Screens.ListScreen())
+//    }
+
+    fun questionClick(id: Int) {
+        val idl = id + 0L
+        router.navigateTo(Screens.DetailScreen(idl))
+}
+
+    fun onBtnClick() = router.navigateTo(Screens.NewQuestionScreen())
 
     companion object {
         private const val offsetDefault = 0

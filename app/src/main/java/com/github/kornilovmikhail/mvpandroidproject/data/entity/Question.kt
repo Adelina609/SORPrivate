@@ -10,13 +10,13 @@ class Question(
     val id: Int,
 
     @SerializedName("title")
-    val title: String,
+    var title: String,
 
     @SerializedName("description")
-    val description: String,
+    var description: String,
 
     @SerializedName("email")
-    val email: String
+    var email: String
 
 //    @SerializedName("answer")
 //    //@Embedded(prefix = "answer")

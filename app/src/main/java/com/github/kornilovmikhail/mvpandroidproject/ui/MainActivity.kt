@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.github.kornilovmikhail.mvpandroidproject.App
+import com.github.kornilovmikhail.mvpandroidproject.IOnBackPressed
 import com.github.kornilovmikhail.mvpandroidproject.R
 import com.github.kornilovmikhail.mvpandroidproject.di.event.component.DaggerQuestionComponent
 import kotlinx.android.synthetic.main.activity_main.*
@@ -39,4 +40,12 @@ class MainActivity : AppCompatActivity() {
         super.onPause()
         navigatorHolder.removeNavigator()
     }
+
+//    override fun onBackPressed() {
+//        val fragment =
+//            this.supportFragmentManager.findFragmentById(R.id.main_container)
+//        (fragment as? IOnBackPressed)?.onBackPressed()?.not()?.let {
+//            super.onBackPressed()
+//        }
+//    }
 }
