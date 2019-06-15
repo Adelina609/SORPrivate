@@ -1,5 +1,6 @@
 package com.github.kornilovmikhail.mvpandroidproject.di.event.module
 
+import com.github.kornilovmikhail.mvpandroidproject.data.repository.AnswersRepo
 import com.github.kornilovmikhail.mvpandroidproject.data.repository.QuestionsRepo
 import com.github.kornilovmikhail.mvpandroidproject.di.event.scope.QuestionScope
 import com.github.kornilovmikhail.mvpandroidproject.presenter.DetailPresenter
@@ -13,8 +14,9 @@ import ru.terrakok.cicerone.Router
 class PresenterModule {
     @Provides
     @QuestionScope
-    fun provideDetailPresenter(questionsRepo: QuestionsRepo, router: Router): DetailPresenter =
-        DetailPresenter(questionsRepo, router)
+    fun provideDetailPresenter(questionsRepo: QuestionsRepo, router: Router,
+                               answersRepo: AnswersRepo): DetailPresenter =
+        DetailPresenter(questionsRepo, router, answersRepo)
 
 //    @Provides
 //    @QuestionScope

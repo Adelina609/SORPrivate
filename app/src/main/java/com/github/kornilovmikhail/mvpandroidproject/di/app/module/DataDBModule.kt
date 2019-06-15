@@ -2,7 +2,8 @@ package com.github.kornilovmikhail.mvpandroidproject.di.app.module
 
 import androidx.room.Room
 import android.content.Context
-import com.github.kornilovmikhail.mvpandroidproject.data.local.QuestionDatabase
+import com.github.kornilovmikhail.mvpandroidproject.data.local.CommonDatabase
+import com.github.kornilovmikhail.mvpandroidproject.data.local.dao.AnswerDao
 import com.github.kornilovmikhail.mvpandroidproject.data.local.dao.QuestionDao
 
 import com.github.kornilovmikhail.mvpandroidproject.di.app.scope.ApplicationScope
@@ -17,13 +18,17 @@ class DataDBModule {
 
     @Provides
     @ApplicationScope
-    fun provideQuestionDatabase(context: Context): QuestionDatabase = Room.databaseBuilder(
+    fun provideQuestionDatabase(context: Context): CommonDatabase = Room.databaseBuilder(
         context,
-        QuestionDatabase::class.java,
+        CommonDatabase::class.java,
         DATABASE_NAME
     ).build()
 
     @Provides
     @ApplicationScope
-    fun provideQuestionDao(questionDatabase: QuestionDatabase): QuestionDao = questionDatabase.questionDao()
+    fun provideQuestionDao(commonDatabase: CommonDatabase): QuestionDao = commonDatabase.questionDao()
+
+    @Provides
+    @ApplicationScope
+    fun provideAnswerDao(commonDatabase: CommonDatabase) : AnswerDao = commonDatabase.answerDao()
 }

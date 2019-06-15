@@ -32,7 +32,7 @@ class AnswerAdapter(
     }
 
     override fun submitList(list: List<Answer>?) {
-        println("))))))))))))))))))))))))))))) I'm in adapter!!!!!!!")
+        println("))))))))))))))))))))))))))))) I'm in adapter ANSWER!!!!!!!")
         super.submitList(if (list != null) ArrayList(list) else null)
     }
 

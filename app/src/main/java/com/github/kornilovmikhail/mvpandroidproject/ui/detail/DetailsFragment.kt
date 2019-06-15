@@ -13,12 +13,11 @@ import com.github.kornilovmikhail.mvpandroidproject.R
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Answer
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Question
 import com.github.kornilovmikhail.mvpandroidproject.di.event.component.DaggerQuestionComponent
+import com.github.kornilovmikhail.mvpandroidproject.di.event.module.AnswerModule
 import com.github.kornilovmikhail.mvpandroidproject.di.event.module.PresenterModule
 import com.github.kornilovmikhail.mvpandroidproject.di.event.module.QuestionModule
 import com.github.kornilovmikhail.mvpandroidproject.presenter.DetailPresenter
-import com.github.kornilovmikhail.mvpandroidproject.presenter.ListPresenter
 import com.github.kornilovmikhail.mvpandroidproject.ui.list.OnScrollListener
-import com.github.kornilovmikhail.mvpandroidproject.ui.list.QuestionAdapter
 import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.android.synthetic.main.fragment_list.*
 import javax.inject.Inject
@@ -37,6 +36,7 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView {
         DaggerQuestionComponent.builder()
             .appComponent(App.getAppComponents())
             .questionModule(QuestionModule())
+            .answerModule(AnswerModule())
             .presenterModule(PresenterModule())
             .build()
             .inject(this)
@@ -55,34 +55,27 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView {
         menuInflater.inflate(R.menu.menu_toolbar_main, menu)
     }
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id.action_open_links -> detailPresenter.onIconClicked(position)
-//        }
-//        return true
-//    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupViews()
+        detailPresenter.getAnswers(0)
+    }
 
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        setupViews()
-//        detailPresenter.getAnswers(0)
-//    }
-//
-//    private fun setupViews() {
-//        rv_answers.layoutManager = LinearLayoutManager(context)
-//        rv_answers.addOnScrollListener(OnScrollListener(
-//            rv_answers.layoutManager as LinearLayoutManager
-//        ) {
-//            detailPresenter.getAnswers(it)
-//        })
-//    }
-//
-//    override fun displayAnswers(answers : List<Answer>){
-//        if(rv_answers.adapter == null){
-//            rv_answers.adapter = AnswerAdapter(answers){}
-//        }
-//        (rv_answers.adapter as AnswerAdapter).submitList(answers)
-//    }
+    private fun setupViews() {
+        rv_answers.layoutManager = LinearLayoutManager(context)
+        rv_answers.addOnScrollListener(OnScrollListener(
+            rv_answers.layoutManager as LinearLayoutManager
+        ) {
+            detailPresenter.getAnswers(it)
+        })
+    }
+
+    override fun displayAnswers(listAnswer: List<Answer>) {
+        if (rv_answers.adapter == null) {
+            rv_answers.adapter = AnswerAdapter(listAnswer) {}
+        }
+        (rv_answers.adapter as AnswerAdapter).submitList(listAnswer)
+    }
 
     override fun displayQuestion(question: Question) {
         tv_title_details_activity.text = question.title

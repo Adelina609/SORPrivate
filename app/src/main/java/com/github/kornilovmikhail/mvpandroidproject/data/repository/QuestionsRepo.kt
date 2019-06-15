@@ -18,6 +18,7 @@ class QuestionsRepo(
     fun getQuestions(offset: Int): Single<List<Question>> {
         if (isFirst) {
             isFirst = false
+            //offset = 0?
             return getQuestionsFromNetwork(offset)
         }
         if (offset > 0) {

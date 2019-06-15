@@ -15,5 +15,5 @@ interface DetailView : MvpView {
     fun showProgressBar()
     fun hideProgressBar()
     fun detachOnScrollListeners()
-    //fun displayAnswers(listAnswer: List<Answer>)
+    fun displayAnswers(listAnswer: List<Answer>)
 }
