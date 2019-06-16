@@ -26,6 +26,12 @@ class AnswersRepo(
         return answersNetworkRepo.getAnswers(id)
     }
 
+    fun getNewEmptyAnswer() : Single<Answer> =
+        answersNetworkRepo.getNewEmptyAnswer()
+
+    fun postNewAnswer(answer:Answer, qId : Long) : Single<Answer>
+            = answersNetworkRepo.addNewAnswer(answer, qId)
+
     private fun getAnswersFromDB(): Single<List<Answer>> = answersDBRepo.getAnswers()
 
     fun cacheAnswers(answers: List<Answer>) {

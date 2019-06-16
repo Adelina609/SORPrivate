@@ -15,4 +15,8 @@
     <string name="describe_the_problem">Describe the problem</string>
     <string name="emptyTitleOrDesc">Enter the title and description of your problem</string>
     <string name="server_add_newq_error">Error create new question</string>
+    <string name="button">Answer</string>
+    <string name="describe_answer">Describe your Answer</string>
+    <string name="emptyDesc">Enter the answer</string>
+    <string name="server_add_newa_error">Error create new answer</string>
 </resources>

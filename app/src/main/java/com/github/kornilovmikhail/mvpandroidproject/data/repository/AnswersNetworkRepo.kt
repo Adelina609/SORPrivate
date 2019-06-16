@@ -1,7 +1,6 @@
 package com.github.kornilovmikhail.mvpandroidproject.data.repository
 
 import com.github.kornilovmikhail.mvpandroidproject.data.entity.Answer
-import com.github.kornilovmikhail.mvpandroidproject.data.entity.Question
 import com.github.kornilovmikhail.mvpandroidproject.data.network.SorApi
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -15,6 +14,18 @@ class AnswersNetworkRepo(private val sorApi: SorApi) {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
-    fun addNewAnswer(answer: Answer) =
-            sorApi.addAnswer(answer)
+
+    fun getNewEmptyAnswer() : Single<Answer> =
+            sorApi
+                .getNewEmptyAnswer()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+
+    fun addNewAnswer(answer: Answer, qId : Long) =
+            sorApi
+                .addAnswerInQuestion(answer, qId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+
+
 }

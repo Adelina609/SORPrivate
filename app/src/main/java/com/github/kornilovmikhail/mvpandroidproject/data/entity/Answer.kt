@@ -13,16 +13,16 @@ class Answer(
     val id: Int,
 
     @SerializedName("answer")
-    val answer: String,
+    var answer: String,
 
     @SerializedName("email")
-    val email: String,
+    var email: String,
 
     @SerializedName("likes")
-    val likes: Int,
+    var likes: Int,
 
     @SerializedName("dislikes")
-    val dislikes: Int,
+    var dislikes: Int,
 
     @SerializedName("question")
 //    @Embedded(prefix = "question")

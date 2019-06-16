@@ -41,8 +41,9 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView{
             .presenterModule(PresenterModule())
             .build()
             .inject(this)
-        super.onCreate(savedInstanceState)
+        //setupViews()
         idQuestion = arguments?.getLong(EXTRA_ID) ?: DEFAULT_ID
+        super.onCreate(savedInstanceState)
         //detailPresenter.getQuestion(idQuestion)
         //setHasOptionsMenu(true)
     }
@@ -59,10 +60,10 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         detailPresenter.getQuestion(idQuestion)
-        setupViews()
         println()
         println("000000000000000000000000 IN DETFRAG1   " + idQuestion)
         detailPresenter.getAnswers(0, idQuestion)
+        setupViews()
     }
 
     private fun setupViews() {
@@ -74,8 +75,15 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView{
             println("000000000000000000000000 IN DETFRAG2   " + idQuestion)
             detailPresenter.getAnswers(it, idQuestion)
         })
+        btn_answer.setOnClickListener(View.OnClickListener {
+            onAnswerBtnClick()
+        })
     }
 
+    private fun onAnswerBtnClick(){
+        //TODO EMAIL!!!!!!!!!!!
+        detailPresenter.onAnswerBtnClick("Emaill")
+    }
 
 
     override fun displayAnswers(listAnswer: List<Answer>) {

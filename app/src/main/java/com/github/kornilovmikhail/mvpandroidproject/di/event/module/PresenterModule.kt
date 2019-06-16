@@ -6,6 +6,7 @@ import com.github.kornilovmikhail.mvpandroidproject.di.event.scope.QuestionScope
 import com.github.kornilovmikhail.mvpandroidproject.presenter.DetailPresenter
 //import com.github.kornilovmikhail.mvpandroidproject.presenter.LinksPresenter
 import com.github.kornilovmikhail.mvpandroidproject.presenter.ListPresenter
+import com.github.kornilovmikhail.mvpandroidproject.presenter.NewAnswerPresenter
 import com.github.kornilovmikhail.mvpandroidproject.presenter.NewQuestionPresenter
 import dagger.Module
 import dagger.Provides
@@ -33,4 +34,9 @@ class PresenterModule {
     @QuestionScope
     fun provideNewQuestionPresenter(questionsRepo: QuestionsRepo, router: Router): NewQuestionPresenter =
             NewQuestionPresenter(questionsRepo, router)
+
+    @Provides
+    @QuestionScope
+    fun provideNewAnswerPresenter(answersRepo: AnswersRepo, router: Router): NewAnswerPresenter =
+        NewAnswerPresenter(answersRepo, router)
 }

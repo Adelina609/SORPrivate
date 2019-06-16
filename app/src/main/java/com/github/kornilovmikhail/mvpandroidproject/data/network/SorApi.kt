@@ -22,10 +22,14 @@ interface SorApi {
     @GET("questionsg")
     fun getNewEmptyQuestion() : Single<Question>
 
+    @GET("answersg")
+    fun getNewEmptyAnswer() : Single<Answer>
+
     @POST("questions")
     //@FormUrlEncoded
     fun addQuestion(@Body question: Question): Single<Question>
 
-    @POST("answers")
-    fun addAnswer(answer: Answer)
+    @POST("questions/{id}")
+    fun addAnswerInQuestion(@Body answer: Answer, @Path("id") qId : Long) : Single<Answer>
+
 }

@@ -14,7 +14,7 @@ import java.lang.Thread.sleep
 class DetailPresenter(private val questionsRepo: QuestionsRepo, private val router: Router,
                       private val answersRepo: AnswersRepo) : MvpPresenter<DetailView>() {
 
-    var qId : Long = 0
+    var qId : Long = 0L
     fun getQuestion(id: Long) {
         questionsRepo.getQuestion(id)
             .doOnSubscribe {
@@ -25,8 +25,7 @@ class DetailPresenter(private val questionsRepo: QuestionsRepo, private val rout
             }
             .subscribeBy(
                 onSuccess = {
-//                    qId = it[id].id + 0L
-//                    println("-------------------------------------------------------- " + qId)
+                    qId = it.id + 0L
                     viewState.displayQuestion(it)
                     //getAnswers(0)
                 },
@@ -76,6 +75,8 @@ class DetailPresenter(private val questionsRepo: QuestionsRepo, private val rout
     companion object {
         private const val offsetDefault = 0
     }
+
+    fun onAnswerBtnClick(email : String) = router.navigateTo(Screens.NewAnswerScreen(email, qId))
 
 //    fun onIconClicked(id: Int) {
 //        router.navigateTo(Screens.LinksScreen(id))
