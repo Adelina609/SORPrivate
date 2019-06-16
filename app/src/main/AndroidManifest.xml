@@ -19,7 +19,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.itis.android.firebasesimple.activity.SignUpFragment"/>
+        <activity android:name=".ui.EmailPasswordActivity"/>
     </application>
-
 </manifest>

@@ -1,0 +1,104 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+androidExtensions {
+    experimental = true
+}
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.github.adelina609.stackoverrelations"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+detekt {
+    version = "1.0.0-RC12"
+    input = files("${project.rootDir}/${project.getName()}/src/main/java")
+    config = files("${project.rootDir}/detekt/detekt-config.yml")
+    filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
+    reports {
+        xml {
+            enabled = true
+            destination = file("build/reports/detekt.xml")
+        }
+        html {
+            enabled = true
+            destination = file("build/reports/detekt.html")
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    def appcompat_version = '1.0.2'
+    def recyclerview_version = '1.1.0-alpha03'
+    def retrofit2_version = "2.5.0"
+    def room_version = '2.1.0-alpha06'
+    def moxyX_version = "1.7.0"
+    def mockito_version = "2.25.0"
+    def dagger_version = "2.21"
+    def cicerone_version = "5.0.0"
+    def rxkotlin_version = "2.3.0"
+    def rxandroid_version = "2.1.0"
+    //kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    //support libraries
+    implementation "androidx.appcompat:appcompat:${appcompat_version}"
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation "androidx.recyclerview:recyclerview:${recyclerview_version}"
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    //tests
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.12'
+    testImplementation "org.mockito:mockito-core:${mockito_version}"
+    testImplementation "org.mockito:mockito-inline:${mockito_version}"
+    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0-alpha02'
+    //retrofit
+    implementation "com.squareup.retrofit2:retrofit:${retrofit2_version}"
+    implementation "com.squareup.retrofit2:converter-gson:${retrofit2_version}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2_version"
+    //room
+    implementation "androidx.room:room-runtime:${room_version}"
+    kapt "androidx.room:room-compiler:${room_version}"
+    implementation "androidx.room:room-rxjava2:${room_version}"
+    //rx
+    implementation "io.reactivex.rxjava2:rxkotlin:${rxkotlin_version}"
+    implementation "io.reactivex.rxjava2:rxandroid:${rxandroid_version}"
+    //moxy
+    kapt "tech.schoolhelper:moxy-x-compiler:${moxyX_version}"
+    implementation "tech.schoolhelper:moxy-x-android:${moxyX_version}"
+    implementation "tech.schoolhelper:moxy-x-androidx:${moxyX_version}"
+    //dagger
+    implementation "com.google.dagger:dagger-android:${dagger_version}"
+    implementation "com.google.dagger:dagger-android-support:${dagger_version}"
+    kapt "com.google.dagger:dagger-android-processor:${dagger_version}"
+    kapt "com.google.dagger:dagger-compiler:${dagger_version}"
+    //cicerone
+    implementation "ru.terrakok.cicerone:cicerone:${cicerone_version}"
+    //firebase
+    implementation 'com.google.firebase:firebase-core:16.0.9'
+    implementation 'com.google.firebase:firebase-auth:17.0.0'
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
+    implementation 'com.google.firebase:firebase-firestore:19.0.2'
+    implementation "com.google.firebase:firebase-storage:17.0.0"
+    //firebase UI
+    implementation 'com.firebaseui:firebase-ui-database:3.2.2'
+    implementation 'com.firebaseui:firebase-ui-auth:4.3.2'
+}
+
+apply plugin: 'com.google.gms.google-services'

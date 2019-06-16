@@ -1,6 +1,7 @@
-package com.itis.android.firebasesimple.activity
+package com.github.adelina609.stackoverrelations.ui.sign_in_up
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,14 +49,23 @@ class SignInFragment : MvpAppCompatFragment(), SignInView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        signInPresenter.currentUser()
         setupViews()
+    }
+
+    private fun signIn(email: String, password: String) {
+        if (!validateForm()) {
+            return
+        }
+        showProgressBar()
+        signInPresenter.signIn(email, password)
+
     }
 
     private fun setupViews(){
         hideProgressBar()
         btn_login.setOnClickListener(View.OnClickListener {
-            //TODO
-            signInPresenter.signIn()
+            signIn(field_email.text.toString(), field_password.text.toString())
         })
         btn_sign_in_with_google.setOnClickListener(View.OnClickListener {
             //with google api
@@ -67,6 +77,28 @@ class SignInFragment : MvpAppCompatFragment(), SignInView {
 
     fun goToNext(){
 
+    }
+
+    private fun validateForm(): Boolean {
+        var valid = true
+
+        val email = field_email.text.toString()
+        if (TextUtils.isEmpty(email)) {
+            field_email.error = "Required."
+            valid = false
+        } else {
+            field_email.error = null
+        }
+
+        val password = field_password.text.toString()
+        if (TextUtils.isEmpty(password)) {
+            field_password.error = "Required."
+            valid = false
+        } else {
+            field_password.error = null
+        }
+
+        return valid
     }
 
     override fun updateUI(user : FirebaseUser?){

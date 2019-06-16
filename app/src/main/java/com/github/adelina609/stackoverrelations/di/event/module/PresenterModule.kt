@@ -3,11 +3,8 @@ package com.github.adelina609.stackoverrelations.di.event.module
 import com.github.adelina609.stackoverrelations.data.repository.AnswersRepo
 import com.github.adelina609.stackoverrelations.data.repository.QuestionsRepo
 import com.github.adelina609.stackoverrelations.di.event.scope.QuestionScope
-import com.github.adelina609.stackoverrelations.presenter.DetailPresenter
+import com.github.adelina609.stackoverrelations.presenter.*
 //import com.github.adelina609.stackoverrelations.presenter.LinksPresenter
-import com.github.adelina609.stackoverrelations.presenter.ListPresenter
-import com.github.adelina609.stackoverrelations.presenter.NewAnswerPresenter
-import com.github.adelina609.stackoverrelations.presenter.NewQuestionPresenter
 import dagger.Module
 import dagger.Provides
 import ru.terrakok.cicerone.Router
@@ -39,4 +36,14 @@ class PresenterModule {
     @QuestionScope
     fun provideNewAnswerPresenter(answersRepo: AnswersRepo, router: Router): NewAnswerPresenter =
         NewAnswerPresenter(answersRepo, router)
+
+    @Provides
+    @QuestionScope
+    fun provideSignInPresenter(router: Router): SignInPresenter =
+        SignInPresenter(router)
+
+    @Provides
+    @QuestionScope
+    fun provideSignUprPresenter(): SignUpPresenter =
+        SignUpPresenter()
 }

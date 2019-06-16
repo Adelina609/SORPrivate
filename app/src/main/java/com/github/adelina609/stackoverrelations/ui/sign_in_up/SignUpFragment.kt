@@ -1,7 +1,6 @@
-package com.itis.android.firebasesimple.activity
+package com.github.adelina609.stackoverrelations.ui.sign_in_up
 
 import com.arellomobile.mvp.MvpAppCompatFragment
-import com.github.adelina609.stackoverrelations.ui.sign_in_up.SignUpView
 
 class SignUpFragment : MvpAppCompatFragment(), SignUpView {
 

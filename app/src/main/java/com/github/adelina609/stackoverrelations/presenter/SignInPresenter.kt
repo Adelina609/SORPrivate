@@ -1,24 +1,18 @@
 package com.github.adelina609.stackoverrelations.presenter
 
-import android.util.Log
-import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
-import jdk.nashorn.internal.runtime.ECMAException.getException
-import com.google.firebase.auth.FirebaseUser
-import org.junit.experimental.results.ResultMatchers.isSuccessful
-import com.google.firebase.auth.AuthResult
-import com.google.android.gms.tasks.OnCompleteListener
-import android.R.attr.password
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.github.adelina609.stackoverrelations.ui.Screens
 import com.github.adelina609.stackoverrelations.ui.sign_in_up.SignInView
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
 import ru.terrakok.cicerone.Router
 
 
 @InjectViewState
-class SignInPresenter(private val router: Router) : MvpPresenter<SignInView>(){
+class SignInPresenter(private val router: Router) : MvpPresenter<SignInView>() {
 
     private lateinit var auth: FirebaseAuth
 
@@ -26,12 +20,12 @@ class SignInPresenter(private val router: Router) : MvpPresenter<SignInView>(){
         auth = FirebaseAuth.getInstance()
     }
 
-    fun currentUser(){
+    fun currentUser() {
         val currentUser = auth.currentUser
         viewState.updateUI(currentUser)
     }
 
-    fun signIn(email : String, password : String, ){
+    fun signIn(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this,
                 OnCompleteListener<AuthResult> { task ->
@@ -41,18 +35,17 @@ class SignInPresenter(private val router: Router) : MvpPresenter<SignInView>(){
                         viewState.updateUI(user)
                     } else {
                         // If sign in fails, display a message to the use
+                        viewState.updateUI(null)
                         viewState.displayError()
                     }
-
-                    // ...
                 })
+
     }
 
     //TODO: email в фрагмент передать
-    fun goToFeed(email : String?) = router.navigateTo(Screens.ListScreen())
+    fun goToFeed(email: String?) = router.navigateTo(Screens.ListScreen())
 
     fun goToSignUp() = router.navigateTo(Screens.SignUpScreen())
-
 
 
 }

@@ -30,13 +30,13 @@
             android:layout_marginTop="16dp">
 
             <EditText
-                    android:id="@+id/email"
+                    android:id="@+id/field_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:hint="@string/hint_email"
                     android:inputType="textEmailAddress" android:autofillHints="@string/hint_email"/>
-        </	com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/ti_password"
@@ -45,7 +45,7 @@
             app:passwordToggleEnabled="true">
 
             <EditText
-                    android:id="@+id/password"
+                    android:id="@+id/field_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -53,7 +53,7 @@
                     android:inputType="textPassword"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorPrimaryDark" android:autofillHints="@string/fui_password_hint"/>
-        </	com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btn_login"

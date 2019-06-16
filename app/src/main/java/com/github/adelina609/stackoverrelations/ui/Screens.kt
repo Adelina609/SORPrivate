@@ -5,8 +5,8 @@ import com.github.adelina609.stackoverrelations.ui.detail.DetailsFragment
 import com.github.adelina609.stackoverrelations.ui.list.ListFragment
 import com.github.adelina609.stackoverrelations.ui.new_answer.NewAnswerFragment
 import com.github.adelina609.stackoverrelations.ui.new_question.NewQuestionFragment
-import com.itis.android.firebasesimple.activity.SignInFragment
-import com.itis.android.firebasesimple.activity.SignUpFragment
+import com.github.adelina609.stackoverrelations.ui.sign_in_up.SignInFragment
+import com.github.adelina609.stackoverrelations.ui.sign_in_up.SignUpFragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 class Screens {
