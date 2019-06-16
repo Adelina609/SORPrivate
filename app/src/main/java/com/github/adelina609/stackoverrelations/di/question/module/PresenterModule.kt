@@ -1,8 +1,8 @@
-package com.github.adelina609.stackoverrelations.di.event.module
+package com.github.adelina609.stackoverrelations.di.question.module
 
 import com.github.adelina609.stackoverrelations.data.repository.AnswersRepo
 import com.github.adelina609.stackoverrelations.data.repository.QuestionsRepo
-import com.github.adelina609.stackoverrelations.di.event.scope.QuestionScope
+import com.github.adelina609.stackoverrelations.di.question.scope.QuestionScope
 import com.github.adelina609.stackoverrelations.presenter.*
 //import com.github.adelina609.stackoverrelations.presenter.LinksPresenter
 import dagger.Module

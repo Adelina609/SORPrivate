@@ -11,9 +11,9 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.github.adelina609.stackoverrelations.App
 import com.github.adelina609.stackoverrelations.R
 import com.github.adelina609.stackoverrelations.data.entity.Question
-import com.github.adelina609.stackoverrelations.di.event.component.DaggerQuestionComponent
-import com.github.adelina609.stackoverrelations.di.event.module.PresenterModule
-import com.github.adelina609.stackoverrelations.di.event.module.QuestionModule
+import com.github.adelina609.stackoverrelations.di.question.component.DaggerQuestionComponent
+import com.github.adelina609.stackoverrelations.di.question.module.PresenterModule
+import com.github.adelina609.stackoverrelations.di.question.module.QuestionModule
 import com.github.adelina609.stackoverrelations.presenter.ListPresenter
 import kotlinx.android.synthetic.main.fragment_list.*
 import javax.inject.Inject

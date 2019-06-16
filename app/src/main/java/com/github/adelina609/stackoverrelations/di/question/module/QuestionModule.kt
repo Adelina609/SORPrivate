@@ -1,9 +1,9 @@
-package com.github.adelina609.stackoverrelations.di.event.module
+package com.github.adelina609.stackoverrelations.di.question.module
 
 import com.github.adelina609.stackoverrelations.data.local.dao.QuestionDao
 import com.github.adelina609.stackoverrelations.data.network.SorApi
 import com.github.adelina609.stackoverrelations.data.repository.*
-import com.github.adelina609.stackoverrelations.di.event.scope.QuestionScope
+import com.github.adelina609.stackoverrelations.di.question.scope.QuestionScope
 
 import dagger.Module
 import dagger.Provides

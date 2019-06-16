@@ -17,11 +17,6 @@ class Question(
 
     @SerializedName("email")
     var email: String
-
-//    @SerializedName("answer")
-//    //@Embedded(prefix = "answer")
-//    @Relation(parentColumn = "id", entityColumn = "question_id", entity = Answer::class)
-//    var answers: List<Answer>
 ) {
     override fun toString(): String {
         return "$id,$title,$description,$email,"

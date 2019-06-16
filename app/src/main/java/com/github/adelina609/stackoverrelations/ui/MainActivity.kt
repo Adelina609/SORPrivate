@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.github.adelina609.stackoverrelations.App
 import com.github.adelina609.stackoverrelations.R
-import com.github.adelina609.stackoverrelations.di.event.component.DaggerQuestionComponent
+import com.github.adelina609.stackoverrelations.di.question.component.DaggerQuestionComponent
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.terrakok.cicerone.NavigatorHolder
@@ -28,22 +28,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(main_toolbar as Toolbar?)
-
-//        mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                // handle desired action here
-//                // One possibility of action is to replace the contents above the nav bar
-//                // return true if you want the item to be displayed as the selected item
-//                return true;
-//            }
-//        });
+        
         navigator.applyCommands(arrayOf<Command>(Replace(Screens.ListScreen())))
+        //TODO btm nav
         bottom_navigation.setOnNavigationItemReselectedListener(BottomNavigationView.OnNavigationItemReselectedListener {
             when(it.itemId){
-                R.id.menu_notifications_item -> navigator.applyCommands(arrayOf<Command>(Replace(Screens.ListScreen())))
-                R.id.menu_feed_item -> println("Invalid number")
-                R.id.menu_profile_item -> navigator.applyCommands(arrayOf<Command>(Replace(Screens.NewQuestionScreen())))
+                R.id.menu_notifications_item -> println("Notifications")
+                R.id.menu_feed_item -> println("Feed")
+                R.id.menu_profile_item -> println("profile")
             }
         })
     }

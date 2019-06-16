@@ -1,4 +1,4 @@
-package com.github.adelina609.stackoverrelations.di.event.scope
+package com.github.adelina609.stackoverrelations.di.question.scope
 
 import javax.inject.Scope
 

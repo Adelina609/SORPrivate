@@ -12,12 +12,11 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.github.adelina609.stackoverrelations.App
 import com.github.adelina609.stackoverrelations.R
-import com.github.adelina609.stackoverrelations.di.event.component.DaggerQuestionComponent
-import com.github.adelina609.stackoverrelations.di.event.module.PresenterModule
-import com.github.adelina609.stackoverrelations.di.event.module.QuestionModule
+import com.github.adelina609.stackoverrelations.di.question.component.DaggerQuestionComponent
+import com.github.adelina609.stackoverrelations.di.question.module.PresenterModule
+import com.github.adelina609.stackoverrelations.di.question.module.QuestionModule
 import com.github.adelina609.stackoverrelations.presenter.SignInPresenter
 import com.github.adelina609.stackoverrelations.ui.new_question.NewQuestionFragment
-import com.github.adelina609.stackoverrelations.ui.sign_in_up.SignInView
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 import javax.inject.Inject
