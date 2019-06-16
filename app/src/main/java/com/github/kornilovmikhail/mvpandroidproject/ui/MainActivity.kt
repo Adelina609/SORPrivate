@@ -7,6 +7,8 @@ import com.github.kornilovmikhail.mvpandroidproject.App
 import com.github.kornilovmikhail.mvpandroidproject.IOnBackPressed
 import com.github.kornilovmikhail.mvpandroidproject.R
 import com.github.kornilovmikhail.mvpandroidproject.di.event.component.DaggerQuestionComponent
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
@@ -28,7 +30,24 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(main_toolbar as Toolbar?)
+
+//        mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                // handle desired action here
+//                // One possibility of action is to replace the contents above the nav bar
+//                // return true if you want the item to be displayed as the selected item
+//                return true;
+//            }
+//        });
         navigator.applyCommands(arrayOf<Command>(Replace(Screens.ListScreen())))
+        bottom_navigation.setOnNavigationItemReselectedListener(BottomNavigationView.OnNavigationItemReselectedListener {
+            when(it.itemId){
+                R.id.menu_notifications_item -> navigator.applyCommands(arrayOf<Command>(Replace(Screens.ListScreen())))
+                R.id.menu_feed_item -> println("Invalid number")
+                R.id.menu_profile_item -> navigator.applyCommands(arrayOf<Command>(Replace(Screens.NewQuestionScreen())))
+            }
+        })
     }
 
     override fun onResume() {
@@ -40,6 +59,7 @@ class MainActivity : AppCompatActivity() {
         super.onPause()
         navigatorHolder.removeNavigator()
     }
+
 
 //    override fun onBackPressed() {
 //        val fragment =

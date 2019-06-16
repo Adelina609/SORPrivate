@@ -19,4 +19,7 @@
     <string name="describe_answer">Describe your Answer</string>
     <string name="emptyDesc">Enter the answer</string>
     <string name="server_add_newa_error">Error create new answer</string>
+    <string name="menu_home">Feed</string>
+    <string name="menu_notifications">Notifications</string>
+    <string name="menu_profile">Profile</string>
 </resources>
