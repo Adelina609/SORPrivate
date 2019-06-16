@@ -11,6 +11,8 @@ import com.github.adelina609.stackoverrelations.ui.detail.DetailsFragment
 import com.github.adelina609.stackoverrelations.ui.list.ListFragment
 import com.github.adelina609.stackoverrelations.ui.new_answer.NewAnswerFragment
 import com.github.adelina609.stackoverrelations.ui.new_question.NewQuestionFragment
+import com.itis.android.firebasesimple.activity.SignInFragment
+import com.itis.android.firebasesimple.activity.SignUpFragment
 
 import dagger.Component
 
@@ -30,6 +32,10 @@ interface QuestionComponent {
     fun inject(newQuestionFragment: NewQuestionFragment)
 
     fun inject(newAnswerFragment: NewAnswerFragment)
+
+    fun inject(signInFragment: SignInFragment)
+
+    fun inject(signUpFragment: SignUpFragment)
 
 //    fun inject(linksFragment: LinksFragment)
 }
