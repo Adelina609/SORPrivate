@@ -9,16 +9,16 @@
               tools:context=".ui.profile.ProfileFragment">
 
     <!--<androidx.appcompat.widget.Toolbar-->
-            <!--android:id="@+id/setupToolbar"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:theme="@style/ActionBarTheme"-->
-            <!--android:background="@color/colorPrimary"-->
-            <!--app:titleTextColor="@color/colorWhite"-->
-            <!--app:title="@string/profile"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toTopOf="parent">-->
+    <!--android:id="@+id/setupToolbar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:theme="@style/ActionBarTheme"-->
+    <!--android:background="@color/colorPrimary"-->
+    <!--app:titleTextColor="@color/colorWhite"-->
+    <!--app:title="@string/profile"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="parent">-->
     <!--</androidx.appcompat.widget.Toolbar>-->
 
     <include layout="@layout/toolbar"
@@ -26,19 +26,20 @@
              android:layout_width="match_parent"
              android:layout_height="?attr/actionBarSize"/>
 
+
     <ImageView
             android:id="@+id/profileCover"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:paddingBottom="1dp"
             android:src="@color/colorPrimary"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"/>
 
     <LinearLayout
             android:orientation="vertical"
             android:background="@color/colorDarkGray"
             android:layout_width="match_parent"
-            android:layout_height="0dp" />
+            android:layout_height="0dp"/>
 
     <LinearLayout
             android:orientation="vertical"
@@ -54,6 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp">
+
 
             <LinearLayout
                     android:orientation="horizontal"
@@ -94,7 +96,7 @@
                         android:shadowDy="1"
                         android:shadowRadius="2"
                         android:drawablePadding="5dp"
-                        android:text="@string/full_name" />
+                        android:text="@string/full_name"/>
 
                 <TextView
                         android:id="@+id/profileUserName"
@@ -136,11 +138,11 @@
                     android:layout_weight="1">
 
                 <TextView
-                        android:id="@+id/postsCount"
+                        android:id="@+id/questions_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
-                        android:text="20"
+                        android:text="0"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
@@ -170,11 +172,11 @@
                     android:layout_weight="1">
 
                 <TextView
-                        android:id="@+id/followersCount"
+                        android:id="@+id/answers_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
-                        android:text="2.4k"
+                        android:text="0"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimary"
@@ -194,13 +196,21 @@
         </LinearLayout>
 
         <TextView
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:textColor="@color/colorDarkGray"
-                android:gravity="center"
+                android:gravity="start"
                 android:layout_marginTop="20dp"
-                android:text="@string/no_post"
+                android:text="@string/my_questions"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:padding="10dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+        </androidx.recyclerview.widget.RecyclerView>
+
 
     </LinearLayout>
 

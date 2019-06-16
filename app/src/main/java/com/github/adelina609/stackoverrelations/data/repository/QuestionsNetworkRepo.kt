@@ -1,5 +1,6 @@
 package com.github.adelina609.stackoverrelations.data.repository
 
+import com.github.adelina609.stackoverrelations.data.entity.Answer
 import com.github.adelina609.stackoverrelations.data.entity.Question
 import com.github.adelina609.stackoverrelations.data.network.SorApi
 import io.reactivex.Single
@@ -18,6 +19,11 @@ class QuestionsNetworkRepo(private val sorApi: SorApi) {
                 .getNewEmptyQuestion()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+
+    fun getQuestionsByEmail(email : String) :Single<List<Question>> =
+        sorApi.getQuestionsByEmail(email)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
 
     fun addNewQuestion(question: Question) =
         sorApi

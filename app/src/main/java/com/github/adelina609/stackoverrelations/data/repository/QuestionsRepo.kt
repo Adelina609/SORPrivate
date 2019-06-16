@@ -14,7 +14,7 @@ class QuestionsRepo(
         private var isFirst = true
     }
 
-    fun getQuestion(id : Long) : Single<Question> =
+    fun getQuestion(id: Long): Single<Question> =
         getQuestionByIDFromNetw(id)
 
 
@@ -54,19 +54,24 @@ class QuestionsRepo(
     private fun getQuestionsFromNetwork(offset: Int): Single<List<Question>> =
         questionsNetworkRepo.getQuestions()
 
-    private fun getQuestionByIDFromNetw(id : Long) : Single<Question> =
-            questionsNetworkRepo.getQuestionById(id)
+    private fun getQuestionByIDFromNetw(id: Long): Single<Question> =
+        questionsNetworkRepo.getQuestionById(id)
 
-    fun postNewQuestion(question :Question) =
+    fun postNewQuestion(question: Question) =
         questionsNetworkRepo.addNewQuestion(question)
 
-    fun getNewEmptyQuestion() : Single<Question> =
-    questionsNetworkRepo.getNewEmptyQuestion()
+    fun getNewEmptyQuestion(): Single<Question> =
+        questionsNetworkRepo.getNewEmptyQuestion()
+
+    fun getQuestionsByEmail(email: String): Single<List<Question>> =
+        questionsNetworkRepo.getQuestionsByEmail(email)
 
 //    private fun getAnswersFromNetwork(offset: Int) : Single<List<Answer>> =
 //        questionsNetworkRepo.getAnswers()
 
-    private fun getQuestionsFromDB(): Single<List<Question>> = questionsDBRepo.getQuestions()
+        private
+
+    fun getQuestionsFromDB(): Single<List<Question>> = questionsDBRepo.getQuestions()
 
 //    private fun getAnswersFromDB(): Single<List<Answer>> = answersDBRepo.getAnswers()
 

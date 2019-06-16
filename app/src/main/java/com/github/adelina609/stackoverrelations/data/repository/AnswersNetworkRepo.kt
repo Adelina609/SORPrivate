@@ -15,6 +15,9 @@ class AnswersNetworkRepo(private val sorApi: SorApi) {
             .observeOn(AndroidSchedulers.mainThread())
     }
 
+    fun getAnswersByEmail(email : String) : Int =
+            sorApi.getAnswersByEmail(email)
+
     fun getNewEmptyAnswer() : Single<Answer> =
             sorApi
                 .getNewEmptyAnswer()

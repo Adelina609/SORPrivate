@@ -1,6 +1,7 @@
 package com.github.adelina609.stackoverrelations.data.repository
 
 import com.github.adelina609.stackoverrelations.data.entity.Answer
+import com.github.adelina609.stackoverrelations.data.entity.Question
 import io.reactivex.Single
 
 class AnswersRepo(
@@ -25,6 +26,9 @@ class AnswersRepo(
     private fun getAnswersFromNetwork(offset: Int, id: Long): Single<List<Answer>> {
         return answersNetworkRepo.getAnswers(id)
     }
+
+    fun getCountAnswersByEmail(email : String) : Int =
+            answersNetworkRepo.getAnswersByEmail(email)
 
     fun getNewEmptyAnswer() : Single<Answer> =
         answersNetworkRepo.getNewEmptyAnswer()

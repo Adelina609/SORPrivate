@@ -25,17 +25,14 @@ class ListPresenter(private val questionsRepo: QuestionsRepo, private val router
                 onSuccess = {
                     if (it.isEmpty()) {
                         if (offset != offsetDefault) {
-                            println("**************************" + "IS EMPTY")
                             viewState.detachOnScrollListeners()
                         }
                     } else {
-                        //questionsRepo.cacheQuestions(it)
                         viewState.displayQuestions(it)
                         viewState.displaySuccess()
                     }
                 },
                 onError = {
-                    println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" + it.message)
                     viewState.displayError()
                 }
             )
@@ -45,11 +42,6 @@ class ListPresenter(private val questionsRepo: QuestionsRepo, private val router
         questionsRepo.setSharedPreferences(sharedPreferences)
 
     fun setSharedPrefs(value: Int) = questionsRepo.setCurrentPagination(value)
-
-//    fun addNewQuestionButtonClick(title : String, description : String, email : String) {
-//        questionsRepo.postNewQuestion(title, description, email)
-//        router.navigateTo(Screens.ListScreen())
-//    }
 
     fun questionClick(id: Int) {
         val idl = id + 0L
