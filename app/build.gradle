@@ -99,6 +99,10 @@ dependencies {
     //firebase UI
     implementation 'com.firebaseui:firebase-ui-database:3.2.2'
     implementation 'com.firebaseui:firebase-ui-auth:4.3.2'
+    //other
+    implementation 'com.pkmmte.view:circularimageview:1.1'
+    //preferences
+    implementation 'androidx.preference:preference:1.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

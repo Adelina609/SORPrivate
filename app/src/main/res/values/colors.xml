@@ -7,4 +7,8 @@
     <color name="text">#FFFFFF</color>
     <color name="primaryText">#212121</color>
     <color name="secondaryText">#757575</color>
+
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorDarkGray">#4D4D4D</color>
+    <color name="colorBlack">#050200</color>
 </resources>

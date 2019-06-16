@@ -1,7 +1,20 @@
 <resources>
+    <string name="full_name">Name</string>
+    <string name="user_name">UserName</string>
+
+    <string name="user_online">Online</string>
+    <string name="user_offline">Offline</string>
+
+    <string name="follow_user">FOLLOW</string>
+
+    <string name="posts_label">posts</string>
+    <string name="followers_label">followers</string>
+    <string name="following_label">following</string>
+
+    <string name="no_post">User has no posts</string>
     <string name="server_questions_error">Can\'t load questions</string>
     <string name="app_name">Stack over relations</string>
-    <string name="server_questions_success">Events loaded</string>
+    <string name="server_questions_success">Questions loaded</string>
     <string name="paginationPreferences">Pagination</string>
     <string name="label_dialog">Pagination</string>
     <string name="label_type_your_pagination">type your paginationPreferences</string>
@@ -138,4 +151,9 @@
     <string name="forgot">Enter the email</string>
     <string name="reset_code">reset code</string>
     <string name="phone_auth">With phone number</string>
+    <string name="answers">answers</string>
+    <string name="questions">questions</string>
+    <string name="status">status</string>
+    <string name="profile">Profile</string>
+    <string name="edit">edit</string>
 </resources>

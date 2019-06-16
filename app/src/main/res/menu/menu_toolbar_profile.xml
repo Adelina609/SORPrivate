@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/action_open_links"
           android:orderInCategory="300"
-          android:title="@string/links"
-          android:icon="@drawable/link_icon_white"
+          android:title="@string/edit"
+          android:icon="@drawable/icons_edit"
           app:showAsAction="always"/>
 </menu>
