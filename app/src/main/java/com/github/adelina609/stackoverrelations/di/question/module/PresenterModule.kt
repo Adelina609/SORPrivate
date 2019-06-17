@@ -46,4 +46,8 @@ class PresenterModule {
     @QuestionScope
     fun provideSignUprPresenter(): SignUpPresenter =
         SignUpPresenter()
+
+    @Provides
+    @QuestionScope
+    fun provideMainActivityPresenter(router: Router) : MainPresenter = MainPresenter(router)
 }

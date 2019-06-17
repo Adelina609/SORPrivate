@@ -31,7 +31,6 @@ class NewAnswerPresenter(private val answersRepo: AnswersRepo, private val route
                     println(answerIt)
                     postNewAnswer(answerIt)
                 }, onError = {
-                    println("????????????????????????????????????? THROWABLE in Answers is NULL : "+(it.message))
                     viewState.displayError()
                 }
 
@@ -48,12 +47,10 @@ class NewAnswerPresenter(private val answersRepo: AnswersRepo, private val route
             }
             .subscribeBy(
                 onSuccess = {
-                    println ("]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]] IM IN POST ANSWER" + it.id)
-                    router.navigateTo(Screens.DetailScreen(answer.question_id+0L))
+                    router.backTo(Screens.DetailScreen(answer.question_id+0L))
                 },
                 onError =
                 {
-                    println ("]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]] THROWABLE IS IN POST ANSWER" + it.message)
                     viewState.displayError()
                 }
             )

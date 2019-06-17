@@ -23,7 +23,6 @@ class NewQuestionPresenter(private val questionsRepo: QuestionsRepo, private val
              }
             .subscribeBy(
                 onSuccess = {
-                    println("????????????????????????????????????? Question is NULL : "+(it == null))
                     val question = it
                     question.title = title
                     question.description = descr
@@ -31,7 +30,6 @@ class NewQuestionPresenter(private val questionsRepo: QuestionsRepo, private val
                     println(question)
                     postNewQuestion(question)
                 }, onError = {
-                    println("????????????????????????????????????? THROWABLE is NULL : "+(it.message))
                     viewState.displayError()
                 }
 
@@ -48,8 +46,7 @@ class NewQuestionPresenter(private val questionsRepo: QuestionsRepo, private val
             }
             .subscribeBy(
                 onSuccess = {
-                    println ("]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]] IM IN POST" + it.id)
-                    router.navigateTo(Screens.ListScreen())
+                    router.backTo(Screens.ListScreen())
                 },
                 onError =
                 {

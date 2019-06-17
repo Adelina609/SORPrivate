@@ -3,9 +3,13 @@ package com.github.adelina609.stackoverrelations.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.github.adelina609.stackoverrelations.App
 import com.github.adelina609.stackoverrelations.R
 import com.github.adelina609.stackoverrelations.di.question.component.DaggerQuestionComponent
+import com.github.adelina609.stackoverrelations.presenter.ListPresenter
+import com.github.adelina609.stackoverrelations.presenter.MainPresenter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.terrakok.cicerone.NavigatorHolder
@@ -14,7 +18,15 @@ import ru.terrakok.cicerone.commands.Command
 import ru.terrakok.cicerone.commands.Replace
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainView {
+
+    @Inject
+    @InjectPresenter
+    lateinit var mainPresenter: MainPresenter
+
+    @ProvidePresenter
+    fun getPresenter(): MainPresenter = mainPresenter
+
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
 
@@ -28,16 +40,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(main_toolbar as Toolbar?)
-        
+
         navigator.applyCommands(arrayOf<Command>(Replace(Screens.ListScreen())))
         //TODO btm nav
-        bottom_navigation.setOnNavigationItemReselectedListener(BottomNavigationView.OnNavigationItemReselectedListener {
+        bottom_navigation.setOnNavigationItemReselectedListener {
             when(it.itemId){
-                R.id.menu_notifications_item -> println("Notifications")
-                R.id.menu_feed_item -> println("Feed")
+                R.id.menu_notifications_item -> print("aaaaaaaaa")
+                R.id.menu_feed_item -> mainPresenter.goToFeed()
                 R.id.menu_profile_item -> println("profile")
             }
-        })
+        }
     }
 
     override fun onResume() {
@@ -49,13 +61,4 @@ class MainActivity : AppCompatActivity() {
         super.onPause()
         navigatorHolder.removeNavigator()
     }
-
-
-//    override fun onBackPressed() {
-//        val fragment =
-//            this.supportFragmentManager.findFragmentById(R.id.main_container)
-//        (fragment as? IOnBackPressed)?.onBackPressed()?.not()?.let {
-//            super.onBackPressed()
-//        }
-//    }
 }

@@ -3,12 +3,25 @@ package com.github.adelina609.stackoverrelations.ui.profile
 import android.os.Bundle
 import android.view.*
 import com.arellomobile.mvp.MvpAppCompatFragment
+import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.github.adelina609.stackoverrelations.R
 import com.github.adelina609.stackoverrelations.data.entity.Question
 import com.github.adelina609.stackoverrelations.di.question.component.DaggerQuestionComponent
+import com.github.adelina609.stackoverrelations.presenter.NewAnswerPresenter
+import com.github.adelina609.stackoverrelations.presenter.ProfilePresenter
 import kotlinx.android.synthetic.main.fragment_profile.*
+import javax.inject.Inject
 
 class ProfileFragment : MvpAppCompatFragment(), ProfileView {
+
+    @Inject
+    @InjectPresenter
+    lateinit var profilePresenter: ProfilePresenter
+
+    @ProvidePresenter
+    fun getPresenter(): ProfilePresenter = profilePresenter
+
 
     override fun displayQuestions(list: List<Question>) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -25,6 +38,12 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_profile, container, false)
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        //TODO
+        //profilePresenter.getQuestions(email)
+        super.onViewCreated(view, savedInstanceState)
+    }
 
     override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
         menuInflater.inflate(R.menu.menu_toolbar_profile, menu)

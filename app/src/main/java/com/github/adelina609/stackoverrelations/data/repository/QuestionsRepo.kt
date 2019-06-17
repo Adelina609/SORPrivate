@@ -24,7 +24,7 @@ class QuestionsRepo(
             //offset = 0?
             return getQuestionsFromNetwork(offset)
         }
-        if (offset > 0) {
+        if (offset >= 0) {
             return getQuestionsFromNetwork(offset)
         }
         return getQuestionsFromDB()

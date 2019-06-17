@@ -15,8 +15,8 @@ class Screens {
         override fun getFragment(): Fragment = ListFragment.getInstance()
     }
 
-    class DetailScreen(private val position: Long) : SupportAppScreen() {
-        override fun getFragment(): Fragment = DetailsFragment.getInstance(position)
+    class DetailScreen(private val id: Long) : SupportAppScreen() {
+        override fun getFragment(): Fragment = DetailsFragment.getInstance(id)
     }
 
 //    class LinksScreen(private val position: Int) : SupportAppScreen() {

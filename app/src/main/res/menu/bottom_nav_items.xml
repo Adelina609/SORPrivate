@@ -6,13 +6,11 @@
             android:title="@string/menu_notifications"
             android:icon="@drawable/icon_bell"
     />
-
     <item
             android:id="@+id/menu_feed_item"
             android:title="@string/menu_home"
             android:icon="@drawable/icon_feed"
     />
-
     <item
             android:id="@+id/menu_profile_item"
             android:title="@string/menu_profile"

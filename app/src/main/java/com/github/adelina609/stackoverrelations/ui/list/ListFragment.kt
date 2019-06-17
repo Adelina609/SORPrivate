@@ -59,13 +59,12 @@ class ListFragment : MvpAppCompatFragment(), ListView {
         ) {
             listPresenter.getQuestions(it)
         })
-        fab_fr_list.setOnClickListener(View.OnClickListener {
+        fab_fr_list.setOnClickListener {
             onBtnClick()
-        })
+        }
     }
 
     override fun displayQuestions(listQuestions: List<Question>) {
-        println("**************************" + listQuestions[0])
         if (rv_questions.adapter == null) {
             rv_questions.adapter = QuestionAdapter(listQuestions) {
                 listPresenter.questionClick(it)
@@ -95,18 +94,6 @@ class ListFragment : MvpAppCompatFragment(), ListView {
     override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
         menuInflater.inflate(R.menu.menu_toolbar_main, menu)
     }
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id.action_pagination -> createDialog()
-//        }
-//        return true
-//    }
-
-//    private fun createDialog() {
-//        val dialog = PaginationDialog()
-//        dialog.show(activity?.supportFragmentManager, "custom")
-//    }
 
     companion object {
         fun getInstance(): ListFragment = ListFragment()
