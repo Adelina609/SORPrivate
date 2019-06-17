@@ -104,5 +104,4 @@ dependencies {
     //preferences
     implementation 'androidx.preference:preference:1.0.0'
 }
-
 apply plugin: 'com.google.gms.google-services'

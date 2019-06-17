@@ -50,4 +50,11 @@ class PresenterModule {
     @Provides
     @QuestionScope
     fun provideMainActivityPresenter(router: Router) : MainPresenter = MainPresenter(router)
+
+    @Provides
+    @QuestionScope
+    fun provideProfilePresenter(questionsRepo: QuestionsRepo, router: Router,
+                                answersRepo: AnswersRepo): ProfilePresenter =
+        ProfilePresenter(questionsRepo, router, answersRepo)
+
 }

@@ -15,6 +15,8 @@ import com.github.adelina609.stackoverrelations.di.question.component.DaggerQues
 import com.github.adelina609.stackoverrelations.di.question.module.PresenterModule
 import com.github.adelina609.stackoverrelations.di.question.module.QuestionModule
 import com.github.adelina609.stackoverrelations.presenter.NewQuestionPresenter
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.fragment_add_new_question.*
 import javax.inject.Inject
 
@@ -42,7 +44,7 @@ class NewQuestionFragment : MvpAppCompatFragment(), NewQuestionView {
 
         if (title != null && description != null) {
             //TODO: EMAIL вводить пользователя!!!!!!!!!!!!!
-            npresenter.onSendBtn(title, description, "email")
+            npresenter.onSendBtn(title, description, FirebaseAuth.getInstance().currentUser?.email)
         } else {
             Toast.makeText(context, getString(R.string.emptyTitleOrDesc), Toast.LENGTH_SHORT).show()
         }

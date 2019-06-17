@@ -24,11 +24,11 @@ interface SorApi {
     @GET("answersg")
     fun getNewEmptyAnswer() : Single<Answer>
 
-    @GET("questions/{email}")
-    fun getQuestionsByEmail(@Path("email") email : String) : Single<List<Question>>
+    @GET("questionsby/{email}")
+    fun getQuestionsByEmail(@Path("email") email : String?) : Single<List<Question>>
 
     @GET("answers/{email}")
-    fun getAnswersByEmail(@Path("email") email : String) : Int
+    fun getAnswersByEmail(@Path("email") email : String?) : Single<List<Int>>
 
     @POST("questions")
     fun addQuestion(@Body question: Question): Single<Question>

@@ -63,7 +63,7 @@ class QuestionsRepo(
     fun getNewEmptyQuestion(): Single<Question> =
         questionsNetworkRepo.getNewEmptyQuestion()
 
-    fun getQuestionsByEmail(email: String): Single<List<Question>> =
+    fun getQuestionsByEmail(email: String?): Single<List<Question>> =
         questionsNetworkRepo.getQuestionsByEmail(email)
 
 //    private fun getAnswersFromNetwork(offset: Int) : Single<List<Answer>> =

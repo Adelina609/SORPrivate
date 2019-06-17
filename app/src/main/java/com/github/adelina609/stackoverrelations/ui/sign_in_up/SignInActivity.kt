@@ -1,4 +1,4 @@
-package com.github.adelina609.stackoverrelations.ui
+package com.github.adelina609.stackoverrelations.ui.sign_in_up
 
 import android.content.Context
 import android.content.Intent
@@ -9,27 +9,34 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.github.adelina609.stackoverrelations.App
 import com.github.adelina609.stackoverrelations.R
+import com.github.adelina609.stackoverrelations.di.question.component.DaggerQuestionComponent
+import com.github.adelina609.stackoverrelations.di.question.module.PresenterModule
+import com.github.adelina609.stackoverrelations.di.question.module.QuestionModule
+import com.github.adelina609.stackoverrelations.presenter.SignInPresenter
+import com.github.adelina609.stackoverrelations.ui.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import kotlinx.android.synthetic.main.activity_emailpassword.*
 import kotlinx.android.synthetic.main.activty_sign_in.*
+import javax.inject.Inject
 
-class EmailPasswordActivity : AppCompatActivity(), View.OnClickListener {
-
-    // [START declare_auth]
-    private lateinit var auth: FirebaseAuth
-    // [END declare_auth]
+class SignInActivity : AppCompatActivity(), View.OnClickListener, SignInView {
 
     private val RC_SIGN_IN = 7
     //Google Sign In Client
     private lateinit var mGoogleSignInClient: GoogleSignInClient
+
+    private lateinit var auth: FirebaseAuth
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,50 +62,10 @@ class EmailPasswordActivity : AppCompatActivity(), View.OnClickListener {
         // [END initialize_auth]
     }
 
-    // [START on_start_check_user]
-    public override fun onStart() {
-        super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-        updateUI(currentUser)
-    }
-    // [END on_start_check_user]
 
-    private fun createAccount(email: String, password: String) {
-        Log.d(TAG, "createAccount:$email")
-        if (!validateForm()) {
-            return
-        }
 
-        showProgressBar()
-
-        // [START create_user_with_email]
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "createUserWithEmail:success")
-                    val user = auth.currentUser
-                    updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    updateUI(null)
-                }
-
-                // [START_EXCLUDE]
-                hideProgressBar()
-                // [END_EXCLUDE]
-            }
-        // [END create_user_with_email]
-    }
-
-    private fun signIn(email: String, password: String) {
-        Log.d(TAG, "signIn:$email")
+    fun signIn(email: String, password: String) {
+        //Log.d(SignInActivity.TAG, "signIn:$email")
         if (!validateForm()) {
             return
         }
@@ -107,25 +74,22 @@ class EmailPasswordActivity : AppCompatActivity(), View.OnClickListener {
 
         // [START sign_in_with_email]
         auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
+            .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithEmail:success")
+                    //Log.d(SignInActivity.TAG, "signInWithEmail:success")
                     val user = auth.currentUser
                     updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    //Log.w(SignInActivity.TAG, "signInWithEmail:failure", task.exception)
+                    displayError()
                     updateUI(null)
                 }
 
                 // [START_EXCLUDE]
                 if (!task.isSuccessful) {
-                    status.setText(R.string.auth_failed)
+                    //status.setText(R.string.auth_failed)
                 }
                 hideProgressBar()
                 // [END_EXCLUDE]
@@ -133,44 +97,17 @@ class EmailPasswordActivity : AppCompatActivity(), View.OnClickListener {
         // [END sign_in_with_email]
     }
 
-//    private fun signOut() {
-//        auth.signOut()
-//        updateUI(null)
-//    }
 
-    private fun sendEmailVerification() {
-        // Disable button
-        //verifyEmailButton.isEnabled = false
 
-        // Send verification email
-        // [START send_email_verification]
-        val user = auth.currentUser
-        user?.sendEmailVerification()
-            ?.addOnCompleteListener(this) { task ->
-                // [START_EXCLUDE]
-                // Re-enable button
-                //verifyEmailButton.isEnabled = true
-
-                if (task.isSuccessful) {
-                    Toast.makeText(
-                        baseContext,
-                        "Verification email sent to ${user.email} ",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else {
-                    Log.e(TAG, "sendEmailVerification", task.exception)
-                    Toast.makeText(
-                        baseContext,
-                        "Failed to send verification email.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                // [END_EXCLUDE]
-            }
-        // [END send_email_verification]
+    // [START on_start_check_user]
+    public override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = auth.currentUser
+        updateUI(currentUser)
     }
 
-    private fun validateForm(): Boolean {
+    fun validateForm(): Boolean {
         var valid = true
 
         val email = field_email.text.toString()
@@ -192,29 +129,14 @@ class EmailPasswordActivity : AppCompatActivity(), View.OnClickListener {
         return valid
     }
 
-    private fun updateUI(user: FirebaseUser?) {
+    override fun updateUI(user: FirebaseUser?) {
         hideProgressBar()
         if (user != null) {
-//            status.text = getString(
-//                R.string.emailpassword_status_fmt,
-//                user.email, user.isEmailVerified
-//            )
-            //detail.text = getString(R.string.firebase_status_fmt, user.uid)
-
-//            emailPasswordButtons.visibility = View.GONE
-//            emailPasswordFields.visibility = View.GONE
-//            signedInButtons.visibility = View.VISIBLE
-
-            //verifyEmailButton.isEnabled = !user.isEmailVerified
             val intent = MainActivity.newIntent(this, user)
             startActivity(intent)
         } else {
-            //status.setText(R.string.signed_out)
-//            detail.text = null
 
-//            emailPasswordButtons.visibility = View.VISIBLE
-//            emailPasswordFields.visibility = View.VISIBLE
-//            signedInButtons.visibility = View.GONE
+            Toast.makeText(this, "user is null", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -238,6 +160,7 @@ class EmailPasswordActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount?) {
         Log.d("Login", "firebaseAuthWithGoogle:" + acct?.id)
 
@@ -260,28 +183,39 @@ class EmailPasswordActivity : AppCompatActivity(), View.OnClickListener {
             }
     }
 
-    fun showProgressBar() {
+    override fun showProgressBar() {
         progressBar_sign_in.visibility = ProgressBar.VISIBLE
     }
 
-    fun hideProgressBar() {
+    override fun hideProgressBar() {
         progressBar_sign_in.visibility = ProgressBar.INVISIBLE
+    }
+
+    override fun displayError(){
+        Toast.makeText(
+            baseContext, "Authentication failed.",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     override fun onClick(v: View) {
         val i = v.id
         when (i) {
-            R.id.btn_to_signup -> startActivity(SignUpActivity.newIntent(this))
+            R.id.btn_to_signup -> startActivity(
+                SignUpActivity.newIntent(
+                    this
+                )
+            )
             R.id.btn_login -> signIn(field_email.text.toString(), field_password.text.toString())
-            R.id.btn_sign_in_with_google -> startActivityForResult(mGoogleSignInClient.getSignInIntent(), RC_SIGN_IN)
+            R.id.btn_sign_in_with_google -> startActivityForResult(mGoogleSignInClient.signInIntent, RC_SIGN_IN)
         }
     }
 
     companion object {
-        private const val TAG = "EmailPassword"
+        private const val TAG = "SignIn"
 
-        fun newIntent(context: Context) : Intent{
-            return Intent(context, EmailPasswordActivity::class.java)
+        fun newIntent(context: Context?) : Intent{
+            return Intent(context, SignInActivity::class.java)
         }
     }
 }

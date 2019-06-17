@@ -27,7 +27,7 @@ class AnswersRepo(
         return answersNetworkRepo.getAnswers(id)
     }
 
-    fun getCountAnswersByEmail(email : String) : Int =
+    fun getCountAnswersByEmail(email : String?) : Single<List<Int>> =
             answersNetworkRepo.getAnswersByEmail(email)
 
     fun getNewEmptyAnswer() : Single<Answer> =

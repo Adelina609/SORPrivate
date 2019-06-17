@@ -1,6 +1,5 @@
 <resources>
     <string name="full_name">Name</string>
-    <string name="user_name">UserName</string>
 
     <string name="user_online">Online</string>
     <string name="user_offline">Offline</string>
@@ -10,6 +9,28 @@
     <string name="posts_label">posts</string>
     <string name="followers_label">followers</string>
     <string name="following_label">following</string>
+
+    <string name="menu_search">Search</string>
+
+
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <!--Profile-->
+    <string name="following">Following</string>
+    <string name="followers">Followers</string>
+    <string name="options">Options</string>
+    <string name="repositories">Repositories</string>
+    <string name="feed">Feed</string>
+    <string name="stars">Stars</string>
+    <string name="bio">Bio</string>
+    <string name="company">Company</string>
+    <string name="location">Location</string>
+    <!--Search-->
+    <string name="search_hint">Search repository or user</string>
+    <string name="results">Results</string>
+    <!--Repo Details-->
+    <string name="info">Info</string>
+    <string name="no_search_results">No search results</string>
 
     <string name="no_post">User has no posts</string>
     <string name="server_questions_error">Can\'t load questions</string>
@@ -34,7 +55,6 @@
     <string name="server_add_newa_error">Error create new answer</string>
     <string name="menu_home">Feed</string>
     <string name="menu_notifications">Notifications</string>
-    <string name="menu_profile">Profile</string>
 
 
 
@@ -155,8 +175,9 @@
     <string name="questions">questions</string>
     <string name="status">status</string>
     <string name="profile">Profile</string>
-    <string name="edit">edit</string>
+    <string name="edit">Edit</string>
     <string name="my_questions">My questions</string>
     <string name="btn_register">Register</string>
     <string name="btn_already_registered">Already registered? Tap me</string>
+    <string name="menu_profile">Profile</string>
 </resources>

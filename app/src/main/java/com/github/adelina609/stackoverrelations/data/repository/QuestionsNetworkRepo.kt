@@ -20,7 +20,7 @@ class QuestionsNetworkRepo(private val sorApi: SorApi) {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
 
-    fun getQuestionsByEmail(email : String) :Single<List<Question>> =
+    fun getQuestionsByEmail(email : String?) :Single<List<Question>> =
         sorApi.getQuestionsByEmail(email)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

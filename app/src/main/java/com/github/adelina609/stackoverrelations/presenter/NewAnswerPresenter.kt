@@ -13,7 +13,7 @@ import ru.terrakok.cicerone.Router
 class NewAnswerPresenter(private val answersRepo: AnswersRepo, private val router: Router)
     : MvpPresenter<NewAnswerView>()  {
 
-    fun onSendBtn(answer : String, email : String, qId : Long){
+    fun onSendBtn(answer : String, email : String?, qId : Long){
         answersRepo.getNewEmptyAnswer()
             .doOnSubscribe {
                 viewState.showProgressBar()
@@ -26,7 +26,7 @@ class NewAnswerPresenter(private val answersRepo: AnswersRepo, private val route
                     println("????????????????????????????????????? Answer is NULL : "+(it == null))
                     var answerIt = it
                     answerIt.answer = answer
-                    answerIt.email = email
+                    answerIt.email = email.toString()
                     answerIt.question_id = qId.toInt()
                     println(answerIt)
                     postNewAnswer(answerIt)

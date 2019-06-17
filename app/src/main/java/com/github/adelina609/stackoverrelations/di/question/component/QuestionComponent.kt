@@ -11,8 +11,9 @@ import com.github.adelina609.stackoverrelations.ui.detail.DetailsFragment
 import com.github.adelina609.stackoverrelations.ui.list.ListFragment
 import com.github.adelina609.stackoverrelations.ui.new_answer.NewAnswerFragment
 import com.github.adelina609.stackoverrelations.ui.new_question.NewQuestionFragment
-import com.github.adelina609.stackoverrelations.ui.sign_in_up.SignInFragment
-import com.github.adelina609.stackoverrelations.ui.sign_in_up.SignUpFragment
+import com.github.adelina609.stackoverrelations.ui.profile.ProfileFragment
+import com.github.adelina609.stackoverrelations.ui.sign_in_up.SignInActivity
+import com.github.adelina609.stackoverrelations.ui.sign_in_up.SignUpActivity
 
 import dagger.Component
 
@@ -33,9 +34,9 @@ interface QuestionComponent {
 
     fun inject(newAnswerFragment: NewAnswerFragment)
 
-    fun inject(signInFragment: SignInFragment)
+    fun inject(signInActivity: SignInActivity)
 
-    fun inject(signUpFragment: SignUpFragment)
+    fun inject(signUpActivity: SignUpActivity)
 
-//    fun inject(linksFragment: LinksFragment)
+    fun inject(profileFragment: ProfileFragment)
 }

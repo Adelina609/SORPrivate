@@ -14,7 +14,7 @@ class ProfilePresenter(
     private val answersRepo: AnswersRepo
 ) : MvpPresenter<ProfileView>() {
 
-    fun getQuestions(email : String) {
+    fun getQuestions(email : String?) {
         questionsRepo.getQuestionsByEmail(email)
             .doOnSubscribe {
                 viewState.showProgressBar()
@@ -34,9 +34,26 @@ class ProfilePresenter(
             )
     }
 
-    fun getAnswers(email : String){
-        viewState.setAnswersValue(
-            answersRepo.getCountAnswersByEmail(email))
+    fun getAnswers(email : String?){
+            answersRepo.
+                getCountAnswersByEmail(email)
+                .doOnSubscribe {
+                    viewState.showProgressBar()
+                }
+                .doAfterTerminate {
+                    viewState.hideProgressBar()
+                }
+                .subscribeBy(
+                    onSuccess = {
+                        println("2222222222222222222222222 + getAnsCount profilepres")
+                        viewState.setAnswersValue(it.size)
+                    },
+                    onError =
+                    {
+                        println("2222222222222222222222222 + getAnsCount profilepres" + it.message)
+                        viewState.displayError()
+                    }
+                )
     }
 
 

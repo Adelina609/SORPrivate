@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity(), MainView {
             when(it.itemId){
                 R.id.menu_notifications_item -> print("aaaaaaaaa")
                 R.id.menu_feed_item -> mainPresenter.goToFeed()
-                R.id.menu_profile_item -> println("profile")
+                R.id.menu_profile_item -> mainPresenter.goToProfile()
             }
         }
     }
