@@ -1,5 +1,7 @@
 package com.github.adelina609.stackoverrelations.ui
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -8,9 +10,8 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.github.adelina609.stackoverrelations.App
 import com.github.adelina609.stackoverrelations.R
 import com.github.adelina609.stackoverrelations.di.question.component.DaggerQuestionComponent
-import com.github.adelina609.stackoverrelations.presenter.ListPresenter
 import com.github.adelina609.stackoverrelations.presenter.MainPresenter
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
@@ -60,5 +61,11 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun onPause() {
         super.onPause()
         navigatorHolder.removeNavigator()
+    }
+
+    companion object{
+        fun newIntent(context: Context, user: FirebaseUser): Intent {
+            return Intent(context, MainActivity::class.java)
+        }
     }
 }

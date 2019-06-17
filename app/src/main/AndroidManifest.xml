@@ -13,12 +13,14 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity android:name="com.github.adelina609.stackoverrelations.ui.MainActivity">
+        </activity>
+        <activity android:name=".ui.EmailPasswordActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.EmailPasswordActivity"/>
+        <activity android:name=".ui.SignUpActivity"/>
     </application>
 </manifest>

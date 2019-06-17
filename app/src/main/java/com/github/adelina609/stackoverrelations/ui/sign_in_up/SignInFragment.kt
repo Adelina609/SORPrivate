@@ -18,7 +18,7 @@ import com.github.adelina609.stackoverrelations.di.question.module.QuestionModul
 import com.github.adelina609.stackoverrelations.presenter.SignInPresenter
 import com.github.adelina609.stackoverrelations.ui.new_question.NewQuestionFragment
 import com.google.firebase.auth.FirebaseUser
-import kotlinx.android.synthetic.main.fragment_sign_in.*
+import kotlinx.android.synthetic.main.activty_sign_in.*
 import javax.inject.Inject
 
 class SignInFragment : MvpAppCompatFragment(), SignInView {
@@ -44,7 +44,7 @@ class SignInFragment : MvpAppCompatFragment(), SignInView {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_sign_in, container, false)
+    ): View? = inflater.inflate(R.layout.activty_sign_in, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

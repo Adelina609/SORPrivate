@@ -157,4 +157,6 @@
     <string name="profile">Profile</string>
     <string name="edit">edit</string>
     <string name="my_questions">My questions</string>
+    <string name="btn_register">Register</string>
+    <string name="btn_already_registered">Already registered? Tap me</string>
 </resources>

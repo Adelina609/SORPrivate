@@ -1,5 +1,7 @@
 package com.github.adelina609.stackoverrelations.ui
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -8,9 +10,16 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.github.adelina609.stackoverrelations.R
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_emailpassword.*
+import kotlinx.android.synthetic.main.activty_sign_in.*
 
 class EmailPasswordActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -18,19 +27,31 @@ class EmailPasswordActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var auth: FirebaseAuth
     // [END declare_auth]
 
+    private val RC_SIGN_IN = 7
+    //Google Sign In Client
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
+
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_emailpassword)
+        setContentView(R.layout.activty_sign_in)
 
+        auth = FirebaseAuth.getInstance()
         // Buttons
-        emailSignInButton.setOnClickListener(this)
-        emailCreateAccountButton.setOnClickListener(this)
-        signOutButton.setOnClickListener(this)
-        verifyEmailButton.setOnClickListener(this)
+        btn_login.setOnClickListener(this)
+        btn_sign_in_with_google.setOnClickListener(this)
+        btn_to_signup.setOnClickListener(this)
+
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this,gso)
+
 
         // [START initialize_auth]
         // Initialize Firebase Auth
-        auth = FirebaseAuth.getInstance()
         // [END initialize_auth]
     }
 
@@ -112,14 +133,14 @@ class EmailPasswordActivity : AppCompatActivity(), View.OnClickListener {
         // [END sign_in_with_email]
     }
 
-    private fun signOut() {
-        auth.signOut()
-        updateUI(null)
-    }
+//    private fun signOut() {
+//        auth.signOut()
+//        updateUI(null)
+//    }
 
     private fun sendEmailVerification() {
         // Disable button
-        verifyEmailButton.isEnabled = false
+        //verifyEmailButton.isEnabled = false
 
         // Send verification email
         // [START send_email_verification]
@@ -128,7 +149,7 @@ class EmailPasswordActivity : AppCompatActivity(), View.OnClickListener {
             ?.addOnCompleteListener(this) { task ->
                 // [START_EXCLUDE]
                 // Re-enable button
-                verifyEmailButton.isEnabled = true
+                //verifyEmailButton.isEnabled = true
 
                 if (task.isSuccessful) {
                     Toast.makeText(
@@ -152,20 +173,20 @@ class EmailPasswordActivity : AppCompatActivity(), View.OnClickListener {
     private fun validateForm(): Boolean {
         var valid = true
 
-        val email = fieldEmail.text.toString()
+        val email = field_email.text.toString()
         if (TextUtils.isEmpty(email)) {
-            fieldEmail.error = "Required."
+            field_email.error = "Required."
             valid = false
         } else {
-            fieldEmail.error = null
+            field_email.error = null
         }
 
-        val password = fieldPassword.text.toString()
+        val password = field_password.text.toString()
         if (TextUtils.isEmpty(password)) {
-            fieldPassword.error = "Required."
+            field_password.error = "Required."
             valid = false
         } else {
-            fieldPassword.error = null
+            field_password.error = null
         }
 
         return valid
@@ -174,46 +195,93 @@ class EmailPasswordActivity : AppCompatActivity(), View.OnClickListener {
     private fun updateUI(user: FirebaseUser?) {
         hideProgressBar()
         if (user != null) {
-            status.text = getString(
-                R.string.emailpassword_status_fmt,
-                user.email, user.isEmailVerified
-            )
-            detail.text = getString(R.string.firebase_status_fmt, user.uid)
+//            status.text = getString(
+//                R.string.emailpassword_status_fmt,
+//                user.email, user.isEmailVerified
+//            )
+            //detail.text = getString(R.string.firebase_status_fmt, user.uid)
 
-            emailPasswordButtons.visibility = View.GONE
-            emailPasswordFields.visibility = View.GONE
-            signedInButtons.visibility = View.VISIBLE
+//            emailPasswordButtons.visibility = View.GONE
+//            emailPasswordFields.visibility = View.GONE
+//            signedInButtons.visibility = View.VISIBLE
 
-            verifyEmailButton.isEnabled = !user.isEmailVerified
+            //verifyEmailButton.isEnabled = !user.isEmailVerified
+            val intent = MainActivity.newIntent(this, user)
+            startActivity(intent)
         } else {
-            status.setText(R.string.signed_out)
-            detail.text = null
+            //status.setText(R.string.signed_out)
+//            detail.text = null
 
-            emailPasswordButtons.visibility = View.VISIBLE
-            emailPasswordFields.visibility = View.VISIBLE
-            signedInButtons.visibility = View.GONE
+//            emailPasswordButtons.visibility = View.VISIBLE
+//            emailPasswordFields.visibility = View.VISIBLE
+//            signedInButtons.visibility = View.GONE
         }
     }
 
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                val account = task.getResult(ApiException::class.java)
+                firebaseAuthWithGoogle(account)
+            } catch (e: ApiException) {
+                // Google Sign In failed, update UI appropriately
+                Log.w("Login", "Google sign in failed", e)
+                // ...
+            }
+
+        }
+    }
+
+    private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount?) {
+        Log.d("Login", "firebaseAuthWithGoogle:" + acct?.id)
+
+        val credential = GoogleAuthProvider.getCredential(acct?.idToken, null)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d("Login", "signInWithCredential:success")
+                    val user = auth.currentUser
+                    updateUI(user)
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w("Login", "signInWithCredential:failure", task.exception)
+                    Toast.makeText(this,"Auth Failed",Toast.LENGTH_LONG).show()
+                    updateUI(null)
+                }
+
+                // ...
+            }
+    }
+
     fun showProgressBar() {
-        activty_progressBar.visibility = ProgressBar.VISIBLE
+        progressBar_sign_in.visibility = ProgressBar.VISIBLE
     }
 
     fun hideProgressBar() {
-        activty_progressBar.visibility = ProgressBar.INVISIBLE
+        progressBar_sign_in.visibility = ProgressBar.INVISIBLE
     }
 
     override fun onClick(v: View) {
         val i = v.id
         when (i) {
-            R.id.emailCreateAccountButton -> createAccount(fieldEmail.text.toString(), fieldPassword.text.toString())
-            R.id.emailSignInButton -> signIn(fieldEmail.text.toString(), fieldPassword.text.toString())
-            R.id.signOutButton -> signOut()
-            R.id.verifyEmailButton -> sendEmailVerification()
+            R.id.btn_to_signup -> startActivity(SignUpActivity.newIntent(this))
+            R.id.btn_login -> signIn(field_email.text.toString(), field_password.text.toString())
+            R.id.btn_sign_in_with_google -> startActivityForResult(mGoogleSignInClient.getSignInIntent(), RC_SIGN_IN)
         }
     }
 
     companion object {
         private const val TAG = "EmailPassword"
+
+        fun newIntent(context: Context) : Intent{
+            return Intent(context, EmailPasswordActivity::class.java)
+        }
     }
 }
