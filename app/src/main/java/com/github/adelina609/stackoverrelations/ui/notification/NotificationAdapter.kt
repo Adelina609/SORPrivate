@@ -4,13 +4,11 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.github.adelina609.stackoverrelations.R
 import com.github.adelina609.stackoverrelations.data.entity.Notification
-import com.github.adelina609.stackoverrelations.data.entity.Question
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.notification_list_item.view.*
 
@@ -31,11 +29,13 @@ class NotificationAdapter(
     }
 
     override fun onBindViewHolder(holder: NotificationHolder, position: Int) {
-        holder.bind(notifications[position].notification, notifications[position].photo.toUri())
+        var uri : Uri = Uri.parse(notifications[position].photo)
+        holder.bind(notifications[position].notification,uri)
         val id = notifications[position].id
         holder.itemView.setOnClickListener {
             notificationLambda.invoke(id)
-        }    }
+        }
+    }
 
 
     class NotificationDiffCallback : DiffUtil.ItemCallback<Notification>() {
@@ -49,7 +49,7 @@ class NotificationAdapter(
     class NotificationHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
         LayoutContainer {
 
-        fun bind(notification: String, uri : Uri) {
+        fun bind(notification: String, uri: Uri) {
             containerView.tv_notif.text = notification
             containerView.iv_photo_notif.setImageURI(uri)
         }
