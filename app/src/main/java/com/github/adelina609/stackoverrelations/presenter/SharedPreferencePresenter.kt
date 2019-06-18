@@ -13,8 +13,6 @@ class SharedPreferencePresenter(private val router : Router,
                                 private val sharedPreferences: SharedPreferences)
     : MvpPresenter<SharedPreferenceView>() {
 
-
-    private val NAME = "my_prefs"
     private val STATUS = "status"
     private val USERNAME = "username"
     private val EMAIL = "email"
@@ -26,9 +24,6 @@ class SharedPreferencePresenter(private val router : Router,
 
     fun setUsername(username : String){
         sharedPreferences.edit()?.putString(USERNAME, username)?.apply()
-        println()
-        println("-----------------------------------------        " +
-                sharedPreferences.getString(USERNAME, USERNAME))
     }
 
     fun setEmail(email : String){
@@ -38,10 +33,4 @@ class SharedPreferencePresenter(private val router : Router,
     fun setStatus(status : String){
         sharedPreferences.edit()?.putString(STATUS, status)?.apply()
     }
-
-
-
-    //fun goToProfile()
-
-
 }

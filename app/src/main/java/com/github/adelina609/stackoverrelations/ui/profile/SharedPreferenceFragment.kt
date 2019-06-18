@@ -25,12 +25,11 @@ import dagger.Provides
 import javax.inject.Inject
 
 class SharedPreferenceFragment
-    : PreferenceFragmentCompat(),  SharedPreferences.OnSharedPreferenceChangeListener, SharedPreferenceView  {
+    : PreferenceFragmentCompat(), SharedPreferenceView  {
 
     private lateinit var listPreference: ListPreference
     private lateinit var username: EditTextPreference
     private lateinit var email: EditTextPreference
-
 
     @Inject
     @InjectPresenter
@@ -39,67 +38,13 @@ class SharedPreferenceFragment
     @ProvidePresenter
     fun getPresenter(): SharedPreferencePresenter = sharedPrefsPresenter
 
-
-//    @Inject
-//    lateinit var prefs: SharedPreferences
-//
-//    fun getPreferences(): SharedPreferences = prefs
-
-    //var prefs: SharedPreferences? = activity?.getSharedPreferences(NAME, Context.MODE_PRIVATE)
-
-
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.prefs_screen)
     }
 
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        when (key) {
-            "et_username" -> {
-                val pref = findPreference(key) as EditTextPreference
-                Toast.makeText(activity!!, "String changed to ${pref.text}", Toast.LENGTH_SHORT).show()
-                pref.title = "username: ${pref.text}"
-                sharedPrefsPresenter.setUsername(pref.text)
-            }
-            "et_email" -> {
-                val email = preferenceManager.findPreference(key) as EditTextPreference
-                email.title = email.text
-                sharedPrefsPresenter.setEmail(email.text)
-            }
-            "list_status" -> {
-                val status = preferenceManager.findPreference(key) as ListPreference
-                val index = status.findIndexOfValue(status.value)
-                val entry = status.entries[index]
-                status.title = "status: $entry"
-                sharedPrefsPresenter.setStatus(entry.toString())
-                //status.setSummary(preference.title)
-//                prefs?.edit()?.putString(STATUS, entry.toString())?.apply()
-            }
-//        email.setOnPreferenceChangeListener { preference, newValue ->
-//            preference.title = "email: $newValue"
-//            FirebaseAuth.getInstance().currentUser?.updateEmail(newValue.toString())
-//            prefs?.edit()?.putString(EMAIL, newValue.toString())?.apply()
-//            true
-//        }
-            }
-        }
-
-
-
-    override fun onResume() {
-        super.onResume()
-        preferenceScreen.sharedPreferences.registerOnSharedPreferenceChangeListener(this)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        preferenceScreen.sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
-    }
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         DaggerQuestionComponent.builder()
             .appComponent(App.getAppComponents())
-            .questionModule(QuestionModule())
             .presenterModule(PresenterModule())
             .build()
             .inject(this)
@@ -108,7 +53,6 @@ class SharedPreferenceFragment
     }
 
     override fun setTexts(status : String?, username : String?, email : String?){
-        println("SEEEEEEEEEEEEEEEEEEEEEEt TEEEEEEEEEEEEEEEEXT AAAAAAAAAAAAAAAAA " + status+ username+ email)
         this.listPreference.title = status
         this.username.title = username
         this.email.title = email
@@ -129,27 +73,21 @@ class SharedPreferenceFragment
             }
             true
         }
-        //username.text = prefs?.getString(USERNAME, "defval")
         username.setOnPreferenceChangeListener { preference, newValue ->
-            //tv_username.text = newValue.toString()
             preference.title = "username: $newValue"
             sharedPrefsPresenter.setUsername(newValue.toString())
-            //prefs?.edit()?.putString(USERNAME, newValue.toString())?.apply()
             true
         }
         email.setOnPreferenceChangeListener { preference, newValue ->
             preference.title = "email: $newValue"
             FirebaseAuth.getInstance().currentUser?.updateEmail(newValue.toString())
             sharedPrefsPresenter.setEmail(newValue.toString())
-            //prefs?.edit()?.putString(EMAIL, newValue.toString())?.apply()
             true
         }
-        //println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+prefs?.getString(STATUS, "def"))
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     companion object {
         fun getInstance(): SharedPreferenceFragment = SharedPreferenceFragment()
     }
-
 }
