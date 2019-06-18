@@ -13,6 +13,7 @@ import com.github.adelina609.stackoverrelations.di.question.component.DaggerQues
 import com.github.adelina609.stackoverrelations.presenter.MainPresenter
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.toolbar.*
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.commands.Command
@@ -40,16 +41,27 @@ class MainActivity : AppCompatActivity(), MainView {
                 .inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(main_toolbar as Toolbar?)
+        setSupportActionBar(toolbar)
 
         navigator.applyCommands(arrayOf<Command>(Replace(Screens.ListScreen())))
-        bottom_navigation.setOnNavigationItemReselectedListener {
-            when(it.itemId){
-                R.id.menu_notifications_item -> mainPresenter.goToNotifications()
-                R.id.menu_feed_item -> mainPresenter.goToFeed()
-                R.id.menu_profile_item -> mainPresenter.goToProfile()
+        bottom_navigation.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.menu_notifications_item -> {
+                    mainPresenter.goToNotifications()
+                    true
+                }
+                R.id.menu_feed_item -> {
+                    mainPresenter.goToFeed()
+                    true
+                }
+                R.id.menu_profile_item -> {
+                    mainPresenter.goToProfile()
+                    true
+                }
+                else -> false
             }
         }
+        bottom_navigation.setOnNavigationItemReselectedListener {}
     }
 
     override fun onResume() {
@@ -62,7 +74,7 @@ class MainActivity : AppCompatActivity(), MainView {
         navigatorHolder.removeNavigator()
     }
 
-    companion object{
+    companion object {
         fun newIntent(context: Context, user: FirebaseUser): Intent {
             return Intent(context, MainActivity::class.java)
         }
