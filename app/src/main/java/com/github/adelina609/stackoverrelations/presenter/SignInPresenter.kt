@@ -4,7 +4,7 @@ import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.github.adelina609.stackoverrelations.ui.Screens
-import com.github.adelina609.stackoverrelations.ui.sign_in_up.SignInView
+import com.github.adelina609.stackoverrelations.ui.auth.SignInView
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import ru.terrakok.cicerone.Router

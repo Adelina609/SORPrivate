@@ -14,4 +14,9 @@ class MainPresenter(private val router: Router) : MvpPresenter<MainView>() {
     fun goToProfile() = router.navigateTo(Screens.ProfileScreen())
 
     fun goToNotifications() = router.navigateTo(Screens.NotificationsScreen())
+
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        router.navigateTo(Screens.ListScreen())
+    }
 }

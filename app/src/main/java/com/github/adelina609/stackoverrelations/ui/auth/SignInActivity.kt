@@ -1,4 +1,4 @@
-package com.github.adelina609.stackoverrelations.ui.sign_in_up
+package com.github.adelina609.stackoverrelations.ui.auth
 
 import android.content.Context
 import android.content.Intent
@@ -178,8 +178,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, SignInView {
     }
 
     override fun onClick(v: View) {
-        val i = v.id
-        when (i) {
+        when (v.id) {
             R.id.btn_to_signup -> startActivity(
                 SignUpActivity.newIntent(
                     this

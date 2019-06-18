@@ -35,9 +35,9 @@ class MainActivity : AppCompatActivity(), MainView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         DaggerQuestionComponent.builder()
-            .appComponent(App.getAppComponents())
-            .build()
-            .inject(this)
+                .appComponent(App.getAppComponents())
+                .build()
+                .inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(main_toolbar as Toolbar?)

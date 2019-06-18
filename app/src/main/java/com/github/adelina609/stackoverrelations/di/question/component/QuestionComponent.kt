@@ -14,8 +14,8 @@ import com.github.adelina609.stackoverrelations.ui.new_question.NewQuestionFragm
 import com.github.adelina609.stackoverrelations.ui.notification.NotificationFragment
 import com.github.adelina609.stackoverrelations.ui.profile.ProfileFragment
 import com.github.adelina609.stackoverrelations.ui.profile.SharedPreferenceFragment
-import com.github.adelina609.stackoverrelations.ui.sign_in_up.SignInActivity
-import com.github.adelina609.stackoverrelations.ui.sign_in_up.SignUpActivity
+import com.github.adelina609.stackoverrelations.ui.auth.SignInActivity
+import com.github.adelina609.stackoverrelations.ui.auth.SignUpActivity
 
 import dagger.Component
 

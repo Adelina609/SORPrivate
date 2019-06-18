@@ -1,7 +1,5 @@
 package com.github.adelina609.stackoverrelations.ui.profile
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.*
 import android.widget.ProgressBar
@@ -17,14 +15,11 @@ import com.github.adelina609.stackoverrelations.di.question.component.DaggerQues
 import com.github.adelina609.stackoverrelations.di.question.module.PresenterModule
 import com.github.adelina609.stackoverrelations.di.question.module.QuestionModule
 import com.github.adelina609.stackoverrelations.presenter.ProfilePresenter
-import com.github.adelina609.stackoverrelations.ui.detail.AnswerAdapter
 import com.github.adelina609.stackoverrelations.ui.list.OnScrollListener
 import com.github.adelina609.stackoverrelations.ui.list.QuestionAdapter
-import com.github.adelina609.stackoverrelations.ui.sign_in_up.SignInActivity
+import com.github.adelina609.stackoverrelations.ui.auth.SignInActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import kotlinx.android.synthetic.main.fragment_details.*
-import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import javax.inject.Inject
 

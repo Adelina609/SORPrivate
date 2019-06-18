@@ -91,10 +91,6 @@ class ListFragment : MvpAppCompatFragment(), ListView {
 
     override fun detachOnScrollListeners() = rv_questions.clearOnScrollListeners()
 
-    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
-        menuInflater.inflate(R.menu.menu_toolbar_main, menu)
-    }
-
     companion object {
         fun getInstance(): ListFragment = ListFragment()
     }

@@ -26,6 +26,7 @@ class NotificationPresenter(
             }
             .subscribeBy(
                 onSuccess = {
+                    println(it.toString())
                     viewState.displayNotifications(it)
                 }, onError = {
                     viewState.displayError()

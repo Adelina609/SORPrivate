@@ -15,11 +15,14 @@ class Notification
     @SerializedName("username")
     var username: String,
 
-    @SerializedName("photo")
-    var photo: String,
+    @SerializedName("email")
+    var email :String,
 
     @SerializedName("notification")
     var notification: String,
+
+    @SerializedName("photo")
+    var photo: String,
 
     @SerializedName("question")
     var question_id: Int

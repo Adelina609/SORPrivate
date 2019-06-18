@@ -27,7 +27,6 @@ class NewQuestionPresenter(private val questionsRepo: QuestionsRepo, private val
                     question.title = title
                     question.description = descr
                     question.email = email.toString()
-                    println(question)
                     postNewQuestion(question)
                 }, onError = {
                     viewState.displayError()

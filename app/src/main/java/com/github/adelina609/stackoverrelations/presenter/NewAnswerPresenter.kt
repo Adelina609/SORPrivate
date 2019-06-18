@@ -34,7 +34,6 @@ class NewAnswerPresenter(
                     answerIt.answer = answer
                     answerIt.email = email.toString()
                     answerIt.question_id = qId.toInt()
-                    println(answerIt)
                     postNewAnswer(answerIt)
                 }, onError = {
                     viewState.displayError()

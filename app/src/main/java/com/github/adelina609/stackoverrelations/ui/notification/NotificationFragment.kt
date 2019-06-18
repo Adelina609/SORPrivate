@@ -55,6 +55,9 @@ class NotificationFragment : MvpAppCompatFragment(), NotificationView {
                 notifPresenter.notifClick(it)
             }
         }
+        if (list.isEmpty()) {
+            Toast.makeText(context, R.string.nothing_to_show, Toast.LENGTH_SHORT).show()
+        }
         (rv_notif.adapter as NotificationAdapter).submitList(list)
     }
 
@@ -79,7 +82,7 @@ class NotificationFragment : MvpAppCompatFragment(), NotificationView {
         notif_progressBar.visibility = ProgressBar.INVISIBLE
     }
 
-    companion object{
-        fun getInstance() : NotificationFragment = NotificationFragment()
+    companion object {
+        fun getInstance(): NotificationFragment = NotificationFragment()
     }
 }

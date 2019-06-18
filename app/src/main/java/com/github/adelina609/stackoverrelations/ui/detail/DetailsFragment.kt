@@ -49,9 +49,6 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView {
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_details, container, false)
 
-    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
-        menuInflater.inflate(R.menu.menu_toolbar_main, menu)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

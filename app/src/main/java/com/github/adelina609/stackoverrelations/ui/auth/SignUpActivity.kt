@@ -1,4 +1,4 @@
-package com.github.adelina609.stackoverrelations.ui.sign_in_up
+package com.github.adelina609.stackoverrelations.ui.auth
 
 import android.content.Context
 import android.content.Intent

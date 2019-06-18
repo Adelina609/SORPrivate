@@ -2,7 +2,7 @@ package com.github.adelina609.stackoverrelations.presenter
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.github.adelina609.stackoverrelations.ui.sign_in_up.SignUpView
+import com.github.adelina609.stackoverrelations.ui.auth.SignUpView
 import com.google.firebase.auth.FirebaseAuth
 
 @InjectViewState

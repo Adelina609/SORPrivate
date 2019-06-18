@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.adelina609.stackoverrelations.R
 import com.github.adelina609.stackoverrelations.data.entity.Notification
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.notification_list_item.view.*
+import kotlinx.android.synthetic.main.list_item_notification.view.*
 
 class NotificationAdapter(
     private val notifications: List<Notification>,
@@ -24,14 +24,15 @@ class NotificationAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.notification_list_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_notification, parent, false)
         return NotificationHolder(view)
     }
 
     override fun onBindViewHolder(holder: NotificationHolder, position: Int) {
         var uri : Uri = Uri.parse(notifications[position].photo)
-        holder.bind(notifications[position].notification,uri)
-        val id = notifications[position].id
+        holder.bind(notifications[position].notification, uri)
+        val id = notifications[position].question_id
+        println("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO" + notifications[position])
         holder.itemView.setOnClickListener {
             notificationLambda.invoke(id)
         }
