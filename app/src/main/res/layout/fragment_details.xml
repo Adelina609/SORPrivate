@@ -54,7 +54,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_answers_title"
         tools:itemCount="2"
-        tools:listitem="@layout/question_list_item" />
+        tools:listitem="@layout/list_item" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_answer"

@@ -87,13 +87,14 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
         profilePresenter.setUp()
 
         if(user?.photoUrl != null){
-            iv_avatar.setImageURI(user?.photoUrl)
+            val uri = user?.photoUrl
+            profilePresenter.putPhoto(uri)
+            iv_avatar.setImageURI(uri)
         }
     }
 
     override fun setTexts(username: String?, status : String?){
         tv_username.text = username
-        println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"+username + status)
         tv_status.text = status
     }
 

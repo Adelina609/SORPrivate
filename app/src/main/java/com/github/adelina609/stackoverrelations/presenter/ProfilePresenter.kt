@@ -1,6 +1,7 @@
 package com.github.adelina609.stackoverrelations.presenter
 
 import android.content.SharedPreferences
+import android.net.Uri
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.github.adelina609.stackoverrelations.data.repository.AnswersRepo
@@ -65,6 +66,9 @@ class ProfilePresenter(
         viewState.setTexts(sharedPreferences.getString(USERNAME, USERNAME), sharedPreferences.getString(STATUS, STATUS))
     }
 
+    fun putPhoto(uri : Uri?){
+        sharedPreferences.edit().putString("photo", uri.toString()).apply()
+    }
     fun goToSettings(){
         router.navigateTo(Screens.SharedPreferenceScreen())
     }

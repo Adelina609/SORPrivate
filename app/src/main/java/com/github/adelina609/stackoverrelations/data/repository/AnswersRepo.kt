@@ -1,8 +1,10 @@
 package com.github.adelina609.stackoverrelations.data.repository
 
+import android.net.Uri
 import com.github.adelina609.stackoverrelations.data.entity.Answer
 import com.github.adelina609.stackoverrelations.data.entity.Question
 import io.reactivex.Single
+import java.net.URI
 
 class AnswersRepo(
     private val answersDBRepo: AnswersDBRepo,
@@ -33,8 +35,8 @@ class AnswersRepo(
     fun getNewEmptyAnswer() : Single<Answer> =
         answersNetworkRepo.getNewEmptyAnswer()
 
-    fun postNewAnswer(answer:Answer, qId : Long) : Single<Answer>
-            = answersNetworkRepo.addNewAnswer(answer, qId)
+    fun postNewAnswer(answer:Answer, qId : Long, username: String, uri: String) : Single<Answer>
+            = answersNetworkRepo.addNewAnswer(answer, qId, username, uri)
 
     private fun getAnswersFromDB(): Single<List<Answer>> = answersDBRepo.getAnswers()
 

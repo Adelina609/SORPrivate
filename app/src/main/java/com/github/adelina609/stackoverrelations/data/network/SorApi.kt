@@ -1,6 +1,8 @@
 package com.github.adelina609.stackoverrelations.data.network
 
+import android.net.Uri
 import com.github.adelina609.stackoverrelations.data.entity.Answer
+import com.github.adelina609.stackoverrelations.data.entity.Notification
 import com.github.adelina609.stackoverrelations.data.entity.Question
 import io.reactivex.Single
 import retrofit2.http.*
@@ -33,7 +35,14 @@ interface SorApi {
     @POST("questions")
     fun addQuestion(@Body question: Question): Single<Question>
 
-    @POST("questions/{id}")
-    fun addAnswerInQuestion(@Body answer: Answer, @Path("id") qId : Long) : Single<Answer>
+    //добавляет новый ответ
+    @POST("questions/{id}/{username}/{uri}")
+    fun addAnswerInQuestion(@Body answer: Answer, @Path("id") qId : Long,
+                            @Path("username") username: String,
+                            @Path("uri") uri: String) : Single<Answer>
+
+    @GET("notifications/{email}")
+    fun getNotifications(@Path("email") email : String?) : Single<List<Notification>>
+
 
 }

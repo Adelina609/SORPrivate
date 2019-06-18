@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.github.adelina609.stackoverrelations.data.entity.Question
 import com.github.adelina609.stackoverrelations.R
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.question_list_item.view.*
+import kotlinx.android.synthetic.main.list_item.view.*
 
 class QuestionAdapter(
     private val questions: List<Question>,
@@ -17,7 +17,7 @@ class QuestionAdapter(
 ) : ListAdapter<Question, QuestionAdapter.QuestionHolder>(QuestionDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, type: Int): QuestionHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.question_list_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
         return QuestionHolder(view)
     }
 
@@ -32,7 +32,6 @@ class QuestionAdapter(
     }
 
     override fun submitList(list: List<Question>?) {
-        println("))))))))))))))))))))))))))))) I'm in adapter!!!!!!!")
         super.submitList(if (list != null) ArrayList(list) else null)
     }
 

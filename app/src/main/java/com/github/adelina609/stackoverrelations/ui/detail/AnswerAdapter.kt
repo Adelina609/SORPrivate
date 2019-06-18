@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.github.adelina609.stackoverrelations.data.entity.Answer
 import com.github.adelina609.stackoverrelations.R
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.question_list_item.view.*
+import kotlinx.android.synthetic.main.list_item.view.*
 
 class AnswerAdapter(
     private val answers: List<Answer>,
@@ -17,7 +17,7 @@ class AnswerAdapter(
 ) : ListAdapter<Answer, AnswerAdapter.AnswerHolder>(AnswerDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, type: Int): AnswerHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.question_list_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
         return AnswerHolder(view)
     }
 

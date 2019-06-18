@@ -36,8 +36,9 @@ class PresenterModule {
 
     @Provides
     @QuestionScope
-    fun provideNewAnswerPresenter(answersRepo: AnswersRepo, router: Router): NewAnswerPresenter =
-        NewAnswerPresenter(answersRepo, router)
+    fun provideNewAnswerPresenter(answersRepo: AnswersRepo, router: Router
+    ,  sharedPreferences: SharedPreferences): NewAnswerPresenter =
+        NewAnswerPresenter(answersRepo, router, sharedPreferences)
 
     @Provides
     @QuestionScope
