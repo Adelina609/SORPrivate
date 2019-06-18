@@ -75,7 +75,7 @@ class DetailPresenter(private val questionsRepo: QuestionsRepo, private val rout
         private const val offsetDefault = 0
     }
 
-    fun onAnswerBtnClick(email : String) = router.navigateTo(Screens.NewAnswerScreen(email, qId))
+    fun onAnswerBtnClick() = router.navigateTo(Screens.NewAnswerScreen(qId))
 
 //    fun onIconClicked(id: Int) {
 //        router.navigateTo(Screens.LinksScreen(id))

@@ -1,7 +1,9 @@
 package com.github.adelina609.stackoverrelations.di.question.module
 
+import android.content.SharedPreferences
 import com.github.adelina609.stackoverrelations.data.repository.AnswersRepo
 import com.github.adelina609.stackoverrelations.data.repository.QuestionsRepo
+import com.github.adelina609.stackoverrelations.di.app.scope.ApplicationScope
 import com.github.adelina609.stackoverrelations.di.question.scope.QuestionScope
 import com.github.adelina609.stackoverrelations.presenter.*
 //import com.github.adelina609.stackoverrelations.presenter.LinksPresenter
@@ -54,7 +56,12 @@ class PresenterModule {
     @Provides
     @QuestionScope
     fun provideProfilePresenter(questionsRepo: QuestionsRepo, router: Router,
-                                answersRepo: AnswersRepo): ProfilePresenter =
-        ProfilePresenter(questionsRepo, router, answersRepo)
+                                answersRepo: AnswersRepo, sharedPreferences: SharedPreferences): ProfilePresenter =
+        ProfilePresenter(questionsRepo, router, answersRepo, sharedPreferences)
+
+    @Provides
+    @QuestionScope
+    fun provideSharedPrefsPresenter(router: Router, sharedPreferences: SharedPreferences)
+            = SharedPreferencePresenter(router, sharedPreferences)
 
 }

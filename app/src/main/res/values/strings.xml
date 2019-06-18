@@ -180,4 +180,6 @@
     <string name="btn_register">Register</string>
     <string name="btn_already_registered">Already registered? Tap me</string>
     <string name="menu_profile">Profile</string>
+    <string name="username">Username</string>
+    <string name="zero">0</string>
 </resources>

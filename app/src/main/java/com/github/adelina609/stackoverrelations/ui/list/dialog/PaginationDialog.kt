@@ -9,7 +9,7 @@
 //import com.arellomobile.mvp.presenter.ProvidePresenter
 //import com.example.stackoverrelations.R
 //
-//import com.github.adelina609.stackoverrelations.data.repository.PaginationPreferencesRepo
+//import com.github.adelina609.stackoverrelations.data.repository.PreferencesRepo
 //import com.github.adelina609.stackoverrelations.presenter.PaginationDialogPresenter
 //
 //class PaginationDialog : MvpAppCompatDialogFragment(), PaginationDialogView {
@@ -18,7 +18,7 @@
 //    lateinit var paginationPresenter: PaginationDialogPresenter
 //
 //    @ProvidePresenter
-//    fun initPresenter() = PaginationDialogPresenter(PaginationPreferencesRepo())
+//    fun initPresenter() = PaginationDialogPresenter(PreferencesRepo())
 //
 //    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 //        val v = activity?.layoutInflater?.inflate(R.layout.pagination_dialog, null)

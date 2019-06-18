@@ -25,7 +25,7 @@ class QuestionAdapter(
 
     override fun onBindViewHolder(holder: QuestionHolder, position: Int) {
         holder.bind(questions[position].title, questions[position].description)
-        var id = questions[position].id
+        val id = questions[position].id
         holder.itemView.setOnClickListener {
             questionLambda.invoke(id)
         }

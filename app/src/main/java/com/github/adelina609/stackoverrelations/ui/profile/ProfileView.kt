@@ -11,5 +11,5 @@ interface ProfileView : MvpView {
     fun detachOnScrollListeners()
     fun setQuestionsValue(questions : Int)
     fun setAnswersValue(answers : Int)
-
+    fun setTexts(username: String?, status : String?)
 }

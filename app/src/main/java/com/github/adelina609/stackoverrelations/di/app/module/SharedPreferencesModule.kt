@@ -9,7 +9,7 @@ import dagger.Provides
 @Module
 class SharedPreferencesModule {
     companion object {
-        const val NAME_SHAREDPREFS: String = "PaginationPreferencesRepo"
+        const val NAME_SHAREDPREFS: String = "my_prefs"
     }
 
     @Provides

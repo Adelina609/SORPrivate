@@ -23,8 +23,8 @@ class QuestionModule {
 
     @Provides
     @QuestionScope
-    fun providePagination(): PaginationPreferencesRepo =
-        PaginationPreferencesRepo()
+    fun providePagination(): PreferencesRepo =
+        PreferencesRepo()
 
     @Provides
     @QuestionScope

@@ -2,19 +2,19 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <EditTextPreference
-            android:defaultValue="Default value"
+            android:defaultValue="Username"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:title="Edit text preference" android:key="et_username"/>
+            android:title="Username" android:key="et_username"/>
     <ListPreference
             android:defaultValue="1"
-            android:title="List preference"
+            android:title="Status"
             android:entries="@array/arrays"
             android:entryValues="@array/arrays"
             android:key="list_status"/>
     <EditTextPreference
-            android:defaultValue="Default value"
+            android:defaultValue="Email"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:title="Edit text preference" android:key="et_email"/>
+            android:title="Email" android:key="et_email"/>
 </PreferenceScreen>

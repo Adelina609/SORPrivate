@@ -2,7 +2,7 @@ package com.github.adelina609.stackoverrelations.data.repository
 
 import android.content.SharedPreferences
 
-class PaginationPreferencesRepo {
+class PreferencesRepo {
     private var preference: SharedPreferences? = null
 
     companion object {

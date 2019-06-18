@@ -80,14 +80,14 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView{
     }
 
     private fun onAnswerBtnClick(){
-        //TODO EMAIL!!!!!!!!!!!
-        detailPresenter.onAnswerBtnClick("Emaill")
+        detailPresenter.onAnswerBtnClick()
     }
 
 
     override fun displayAnswers(listAnswer: List<Answer>) {
         if (rv_answers.adapter == null) {
-            rv_answers.adapter = AnswerAdapter(listAnswer) {}
+            rv_answers.adapter = AnswerAdapter(listAnswer) {
+            }
         }
         (rv_answers.adapter as AnswerAdapter).submitList(listAnswer)
     }

@@ -1,9 +1,12 @@
 package com.github.adelina609.stackoverrelations.ui.profile
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.*
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -14,9 +17,14 @@ import com.github.adelina609.stackoverrelations.di.question.component.DaggerQues
 import com.github.adelina609.stackoverrelations.di.question.module.PresenterModule
 import com.github.adelina609.stackoverrelations.di.question.module.QuestionModule
 import com.github.adelina609.stackoverrelations.presenter.ProfilePresenter
+import com.github.adelina609.stackoverrelations.ui.detail.AnswerAdapter
+import com.github.adelina609.stackoverrelations.ui.list.OnScrollListener
+import com.github.adelina609.stackoverrelations.ui.list.QuestionAdapter
 import com.github.adelina609.stackoverrelations.ui.sign_in_up.SignInActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import kotlinx.android.synthetic.main.fragment_details.*
+import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import javax.inject.Inject
 
@@ -31,10 +39,18 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
 
     private var user: FirebaseUser? = FirebaseAuth.getInstance().currentUser
 
+    private val NAME = "my_prefs"
+    private val STATUS = "status"
+    private val USERNAME = "username"
+
     override fun displayQuestions(list: List<Question>) {
         println("999999999999999999 dispay questions() in ProfileFR")
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+        if (rv_questions_fr_profile.adapter == null) {
+            rv_questions_fr_profile.adapter = QuestionAdapter(list) {
+                profilePresenter.questionClick(it)
+            }
+        }
+        (rv_questions_fr_profile.adapter as QuestionAdapter).submitList(list)    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         DaggerQuestionComponent
@@ -61,11 +77,27 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
     }
 
     private fun setupViews() {
-        tv_username.text = user?.displayName
-        println("999999999999999999999" + user?.email)
-        val photo = user?.photoUrl
-        iv_avatar.setImageURI(user?.photoUrl)
+        rv_questions_fr_profile.layoutManager = LinearLayoutManager(context)
+        rv_questions_fr_profile.addOnScrollListener(OnScrollListener(
+            rv_questions_fr_profile.layoutManager as LinearLayoutManager
+        ) {
+            profilePresenter.getQuestions(user?.email)
+        })
+
+        profilePresenter.setUp()
+
+        if(user?.photoUrl != null){
+            iv_avatar.setImageURI(user?.photoUrl)
+        }
     }
+
+    override fun setTexts(username: String?, status : String?){
+        tv_username.text = username
+        println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"+username + status)
+        tv_status.text = status
+    }
+
+    override fun detachOnScrollListeners() = rv_questions_fr_profile.clearOnScrollListeners()
 
     override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
         menuInflater.inflate(R.menu.menu_toolbar_profile, menu)
@@ -92,9 +124,6 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
         progress.visibility = ProgressBar.INVISIBLE
     }
 
-    override fun detachOnScrollListeners() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
     private fun signOut() {
         FirebaseAuth.getInstance().signOut()
@@ -104,8 +133,7 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_sign_out -> signOut()
-            //TODO
-            //R.id.menu_edit ->
+            R.id.menu_edit -> profilePresenter.goToSettings()
         }
         return true
     }

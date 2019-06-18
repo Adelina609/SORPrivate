@@ -7,7 +7,7 @@ import io.reactivex.Single
 class QuestionsRepo(
     private val questionsDBRepo: QuestionsDBRepo,
     private val questionsNetworkRepo: QuestionsNetworkRepo,
-    private val paginationPreferencesRepo: PaginationPreferencesRepo
+    private val preferencesRepo: PreferencesRepo
 //    private val answersDBRepo: AnswersDBRepo
 ) {
     companion object {
@@ -30,25 +30,14 @@ class QuestionsRepo(
         return getQuestionsFromDB()
     }
 
-//    fun getAnswers(offset: Int): Single<List<Answer>> {
-//        if (isFirst) {
-//            isFirst = false
-//            return getAnswersFromNetwork(offset)
-//        }
-//        if (offset > 0) {
-//            return getAnswersFromNetwork(offset)
-//        }
-//        return getAnswersFromDB()
-//    }
-
-    private fun getCurrentPagination(): Int? = paginationPreferencesRepo.getCurrentPagination()
+    private fun getCurrentPagination(): Int? = preferencesRepo.getCurrentPagination()
 
     fun setCurrentPagination(pagination: Int) {
-        paginationPreferencesRepo.setCurrentPagination(pagination)
+        preferencesRepo.setCurrentPagination(pagination)
     }
 
     fun setSharedPreferences(sharedPreferences: SharedPreferences) {
-        paginationPreferencesRepo.setSharedPrefs(sharedPreferences)
+        preferencesRepo.setSharedPrefs(sharedPreferences)
     }
 
     private fun getQuestionsFromNetwork(offset: Int): Single<List<Question>> =

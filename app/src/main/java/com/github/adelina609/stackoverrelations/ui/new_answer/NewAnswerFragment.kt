@@ -89,10 +89,9 @@ class NewAnswerFragment : MvpAppCompatFragment(), NewAnswerView {
         private const val DEFAULT_QID = 0L
         private const val EXTRA_QID = "ID"
 
-        fun getInstance(email : String, qId : Long): NewAnswerFragment {
+        fun getInstance( qId : Long): NewAnswerFragment {
             val newAnswerFragment = NewAnswerFragment()
             val args = Bundle()
-            args.putString(EXTRA_EMAIL, email)
             args.putLong(EXTRA_QID, qId)
             newAnswerFragment.arguments = args
             return newAnswerFragment
