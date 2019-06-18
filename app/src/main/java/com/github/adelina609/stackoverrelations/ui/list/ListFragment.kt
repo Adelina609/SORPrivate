@@ -37,7 +37,6 @@ class ListFragment : MvpAppCompatFragment(), ListView {
         super.onCreate(savedInstanceState)
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,7 +48,7 @@ class ListFragment : MvpAppCompatFragment(), ListView {
         listPresenter.getQuestions(0)
     }
 
-    private fun onBtnClick(){
+    private fun onBtnClick() {
         listPresenter.onBtnClick()
     }
 

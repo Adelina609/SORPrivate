@@ -10,17 +10,17 @@ import io.reactivex.rxkotlin.subscribeBy
 import ru.terrakok.cicerone.Router
 
 @InjectViewState
-class NewQuestionPresenter(private val questionsRepo: QuestionsRepo, private val router: Router)
-    : MvpPresenter<NewQuestionView>()  {
+class NewQuestionPresenter(private val questionsRepo: QuestionsRepo, private val router: Router) :
+    MvpPresenter<NewQuestionView>() {
 
-    fun onSendBtn(title: String, descr : String, email : String?){
+    fun onSendBtn(title: String, descr: String, email: String?) {
         questionsRepo.getNewEmptyQuestion()
-             .doOnSubscribe {
-                 viewState.showProgressBar()
-             }
-             .doAfterTerminate {
-                 viewState.hideProgressBar()
-             }
+            .doOnSubscribe {
+                viewState.showProgressBar()
+            }
+            .doAfterTerminate {
+                viewState.hideProgressBar()
+            }
             .subscribeBy(
                 onSuccess = {
                     val question = it
@@ -36,11 +36,11 @@ class NewQuestionPresenter(private val questionsRepo: QuestionsRepo, private val
             )
     }
 
-    fun postNewQuestion(question : Question){
+    fun postNewQuestion(question: Question) {
         questionsRepo.postNewQuestion(question)
             .doOnSubscribe {
-            viewState.showProgressBar()
-        }
+                viewState.showProgressBar()
+            }
             .doAfterTerminate {
                 viewState.hideProgressBar()
             }
@@ -50,7 +50,6 @@ class NewQuestionPresenter(private val questionsRepo: QuestionsRepo, private val
                 },
                 onError =
                 {
-                    println ("]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]] THROWABLE IS" + it.message)
                     viewState.displayError()
                 }
             )

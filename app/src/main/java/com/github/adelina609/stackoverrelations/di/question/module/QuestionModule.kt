@@ -33,5 +33,10 @@ class QuestionModule {
 
     @Provides
     @QuestionScope
+    fun provideNotifNetworkRepo(sorApi: SorApi) : NotificationNetworkRepo =
+        NotificationNetworkRepo(sorApi)
+
+    @Provides
+    @QuestionScope
     fun provideQuestionsDBRepo(questionDao: QuestionDao): QuestionsDBRepo = QuestionsDBRepo(questionDao)
 }

@@ -2,11 +2,10 @@ package com.github.adelina609.stackoverrelations.di.question.module
 
 import android.content.SharedPreferences
 import com.github.adelina609.stackoverrelations.data.repository.AnswersRepo
+import com.github.adelina609.stackoverrelations.data.repository.NotificationNetworkRepo
 import com.github.adelina609.stackoverrelations.data.repository.QuestionsRepo
-import com.github.adelina609.stackoverrelations.di.app.scope.ApplicationScope
 import com.github.adelina609.stackoverrelations.di.question.scope.QuestionScope
 import com.github.adelina609.stackoverrelations.presenter.*
-//import com.github.adelina609.stackoverrelations.presenter.LinksPresenter
 import dagger.Module
 import dagger.Provides
 import ru.terrakok.cicerone.Router
@@ -15,14 +14,11 @@ import ru.terrakok.cicerone.Router
 class PresenterModule {
     @Provides
     @QuestionScope
-    fun provideDetailPresenter(questionsRepo: QuestionsRepo, router: Router,
-                               answersRepo: AnswersRepo): DetailPresenter =
+    fun provideDetailPresenter(
+        questionsRepo: QuestionsRepo, router: Router,
+        answersRepo: AnswersRepo
+    ): DetailPresenter =
         DetailPresenter(questionsRepo, router, answersRepo)
-
-//    @Provides
-//    @QuestionScope
-//    fun provideLinksPresenter(questionsRepo: QuestionsRepo): LinksPresenter =
-//        LinksPresenter(questionsRepo)
 
     @Provides
     @QuestionScope
@@ -32,12 +28,14 @@ class PresenterModule {
     @Provides
     @QuestionScope
     fun provideNewQuestionPresenter(questionsRepo: QuestionsRepo, router: Router): NewQuestionPresenter =
-            NewQuestionPresenter(questionsRepo, router)
+        NewQuestionPresenter(questionsRepo, router)
 
     @Provides
     @QuestionScope
-    fun provideNewAnswerPresenter(answersRepo: AnswersRepo, router: Router
-    ,  sharedPreferences: SharedPreferences): NewAnswerPresenter =
+    fun provideNewAnswerPresenter(
+        answersRepo: AnswersRepo, router: Router
+        , sharedPreferences: SharedPreferences
+    ): NewAnswerPresenter =
         NewAnswerPresenter(answersRepo, router, sharedPreferences)
 
     @Provides
@@ -52,17 +50,26 @@ class PresenterModule {
 
     @Provides
     @QuestionScope
-    fun provideMainActivityPresenter(router: Router) : MainPresenter = MainPresenter(router)
+    fun provideMainActivityPresenter(router: Router): MainPresenter = MainPresenter(router)
 
     @Provides
     @QuestionScope
-    fun provideProfilePresenter(questionsRepo: QuestionsRepo, router: Router,
-                                answersRepo: AnswersRepo, sharedPreferences: SharedPreferences): ProfilePresenter =
+    fun provideProfilePresenter(
+        questionsRepo: QuestionsRepo, router: Router,
+        answersRepo: AnswersRepo, sharedPreferences: SharedPreferences
+    ): ProfilePresenter =
         ProfilePresenter(questionsRepo, router, answersRepo, sharedPreferences)
 
     @Provides
     @QuestionScope
-    fun provideSharedPrefsPresenter(router: Router, sharedPreferences: SharedPreferences)
-            = SharedPreferencePresenter(router, sharedPreferences)
+    fun provideSharedPrefsPresenter(router: Router, sharedPreferences: SharedPreferences) =
+        SharedPreferencePresenter(router, sharedPreferences)
+
+    @Provides
+    @QuestionScope
+    fun provideNotifPresenter(
+        notificationNetworkRepo: NotificationNetworkRepo,
+        router: Router
+    ) = NotificationPresenter(notificationNetworkRepo, router)
 
 }

@@ -79,4 +79,7 @@ class NotificationFragment : MvpAppCompatFragment(), NotificationView {
         notif_progressBar.visibility = ProgressBar.INVISIBLE
     }
 
+    companion object{
+        fun getInstance() : NotificationFragment = NotificationFragment()
+    }
 }

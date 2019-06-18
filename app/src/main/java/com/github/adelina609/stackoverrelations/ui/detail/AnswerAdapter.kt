@@ -1,13 +1,13 @@
 package com.github.adelina609.stackoverrelations.ui.detail
 
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.github.adelina609.stackoverrelations.data.entity.Answer
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.github.adelina609.stackoverrelations.R
+import com.github.adelina609.stackoverrelations.data.entity.Answer
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.list_item.view.*
 
@@ -25,7 +25,6 @@ class AnswerAdapter(
 
     override fun onBindViewHolder(holder: AnswerHolder, position: Int) {
         holder.bind(answers[position].answer)
-            //, answers[position].description
         holder.itemView.setOnClickListener {
             answerLambda.invoke(position)
         }
@@ -33,7 +32,6 @@ class AnswerAdapter(
 
     override fun submitList(list: List<Answer>?) {
         super.submitList(if (list != null) ArrayList(list) else null)
-        println("))))))))))))))))))))))))))))) I'm in adapter ANSWER!!!!!!!" + (list != null))
     }
 
     class AnswerDiffCallback : DiffUtil.ItemCallback<Answer>() {

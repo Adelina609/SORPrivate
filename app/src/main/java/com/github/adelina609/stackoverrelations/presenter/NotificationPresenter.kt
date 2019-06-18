@@ -2,8 +2,6 @@ package com.github.adelina609.stackoverrelations.presenter
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.arellomobile.mvp.MvpView
-import com.github.adelina609.stackoverrelations.data.repository.AnswersRepo
 import com.github.adelina609.stackoverrelations.data.repository.NotificationNetworkRepo
 import com.github.adelina609.stackoverrelations.ui.Screens
 import com.github.adelina609.stackoverrelations.ui.notification.NotificationView
@@ -12,10 +10,12 @@ import io.reactivex.rxkotlin.subscribeBy
 import ru.terrakok.cicerone.Router
 
 @InjectViewState
-class NotificationPresenter(private val notificationNetworkRepo: NotificationNetworkRepo,
-                            private val router: Router) : MvpPresenter<NotificationView>() {
+class NotificationPresenter(
+    private val notificationNetworkRepo: NotificationNetworkRepo,
+    private val router: Router
+) : MvpPresenter<NotificationView>() {
 
-    fun getNotifications(){
+    fun getNotifications() {
         val email = FirebaseAuth.getInstance().currentUser?.email
         notificationNetworkRepo.getAnswersByEmail(email)
             .doOnSubscribe {
@@ -26,7 +26,7 @@ class NotificationPresenter(private val notificationNetworkRepo: NotificationNet
             }
             .subscribeBy(
                 onSuccess = {
-                    viewState.displayNotifications()
+                    viewState.displayNotifications(it)
                 }, onError = {
                     viewState.displayError()
                 })

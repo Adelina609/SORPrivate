@@ -39,12 +39,7 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
 
     private var user: FirebaseUser? = FirebaseAuth.getInstance().currentUser
 
-    private val NAME = "my_prefs"
-    private val STATUS = "status"
-    private val USERNAME = "username"
-
     override fun displayQuestions(list: List<Question>) {
-        println("999999999999999999 dispay questions() in ProfileFR")
         if (rv_questions_fr_profile.adapter == null) {
             rv_questions_fr_profile.adapter = QuestionAdapter(list) {
                 profilePresenter.questionClick(it)
@@ -124,7 +119,6 @@ class ProfileFragment : MvpAppCompatFragment(), ProfileView {
     override fun hideProgressBar() {
         progress.visibility = ProgressBar.INVISIBLE
     }
-
 
     private fun signOut() {
         FirebaseAuth.getInstance().signOut()

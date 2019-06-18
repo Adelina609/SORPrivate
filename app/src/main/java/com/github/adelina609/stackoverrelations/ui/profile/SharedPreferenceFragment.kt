@@ -1,15 +1,11 @@
 package com.github.adelina609.stackoverrelations.ui.profile
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
-import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -17,15 +13,12 @@ import com.github.adelina609.stackoverrelations.App
 import com.github.adelina609.stackoverrelations.R
 import com.github.adelina609.stackoverrelations.di.question.component.DaggerQuestionComponent
 import com.github.adelina609.stackoverrelations.di.question.module.PresenterModule
-import com.github.adelina609.stackoverrelations.di.question.module.QuestionModule
-import com.github.adelina609.stackoverrelations.presenter.ProfilePresenter
 import com.github.adelina609.stackoverrelations.presenter.SharedPreferencePresenter
 import com.google.firebase.auth.FirebaseAuth
-import dagger.Provides
 import javax.inject.Inject
 
 class SharedPreferenceFragment
-    : PreferenceFragmentCompat(), SharedPreferenceView  {
+    : PreferenceFragmentCompat(), SharedPreferenceView {
 
     private lateinit var listPreference: ListPreference
     private lateinit var username: EditTextPreference
@@ -52,12 +45,13 @@ class SharedPreferenceFragment
         sharedPrefsPresenter.getTitles()
     }
 
-    override fun setTexts(status : String?, username : String?, email : String?){
+    override fun setTexts(status: String?, username: String?, email: String?) {
         this.listPreference.title = status
         this.username.title = username
         this.email.title = email
 
     }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         listPreference = preferenceManager.findPreference("list_status") as ListPreference
         username = preferenceManager.findPreference("et_username") as EditTextPreference

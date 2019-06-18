@@ -9,10 +9,9 @@ import ru.terrakok.cicerone.Router
 
 class MainPresenter(private val router: Router) : MvpPresenter<MainView>() {
 
-
     fun goToFeed() = router.backTo(Screens.ListScreen())
 
     fun goToProfile() = router.navigateTo(Screens.ProfileScreen())
 
-
+    fun goToNotifications() = router.navigateTo(Screens.NotificationsScreen())
 }

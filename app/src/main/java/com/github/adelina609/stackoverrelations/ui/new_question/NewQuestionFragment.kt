@@ -16,7 +16,6 @@ import com.github.adelina609.stackoverrelations.di.question.module.PresenterModu
 import com.github.adelina609.stackoverrelations.di.question.module.QuestionModule
 import com.github.adelina609.stackoverrelations.presenter.NewQuestionPresenter
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.fragment_add_new_question.*
 import javax.inject.Inject
 
@@ -39,16 +38,14 @@ class NewQuestionFragment : MvpAppCompatFragment(), NewQuestionView {
     }
 
     override fun sendQuestion() {
-        var title: String = et_title_fr_add_q.text.toString()
-        var description: String = et_describe_fr_add_q.text.toString()
+        val title: String = et_title_fr_add_q.text.toString()
+        val description: String = et_describe_fr_add_q.text.toString()
 
         if (title != null && description != null) {
-            //TODO: EMAIL вводить пользователя!!!!!!!!!!!!!
             npresenter.onSendBtn(title, description, FirebaseAuth.getInstance().currentUser?.email)
         } else {
             Toast.makeText(context, getString(R.string.emptyTitleOrDesc), Toast.LENGTH_SHORT).show()
         }
-
     }
 
     override fun onCreateView(
@@ -61,16 +58,18 @@ class NewQuestionFragment : MvpAppCompatFragment(), NewQuestionView {
         setupViews()
     }
 
-    private fun setupViews(){
+    private fun setupViews() {
         fr_add_new_q_progressBar.visibility = ProgressBar.INVISIBLE
-        send_button.setOnClickListener(View.OnClickListener {
+        send_button.setOnClickListener {
             sendQuestion()
-        })
+        }
     }
 
     override fun displayError() {
-        Toast.makeText(context, getString(R.string.server_add_newq_error),
-            Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            context, getString(R.string.server_add_newq_error),
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     override fun showProgressBar() {

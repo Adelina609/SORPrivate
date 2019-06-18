@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.android.synthetic.main.fragment_list.*
 import javax.inject.Inject
 
-class DetailsFragment : MvpAppCompatFragment(), DetailView{
+class DetailsFragment : MvpAppCompatFragment(), DetailView {
     @Inject
     @InjectPresenter
     lateinit var detailPresenter: DetailPresenter
@@ -40,11 +40,8 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView{
             .presenterModule(PresenterModule())
             .build()
             .inject(this)
-        //setupViews()
         idQuestion = arguments?.getLong(EXTRA_ID) ?: DEFAULT_ID
         super.onCreate(savedInstanceState)
-        //detailPresenter.getQuestion(idQuestion)
-        //setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -59,8 +56,6 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         detailPresenter.getQuestion(idQuestion)
-        println()
-        println("000000000000000000000000 IN DETFRAG1   " + idQuestion)
         detailPresenter.getAnswers(0, idQuestion)
         setupViews()
     }
@@ -70,16 +65,14 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView{
         rv_answers.addOnScrollListener(OnScrollListener(
             rv_answers.layoutManager as LinearLayoutManager
         ) {
-            println()
-            println("000000000000000000000000 IN DETFRAG2   " + idQuestion)
             detailPresenter.getAnswers(it, idQuestion)
         })
-        btn_answer.setOnClickListener(View.OnClickListener {
+        btn_answer.setOnClickListener {
             onAnswerBtnClick()
-        })
+        }
     }
 
-    private fun onAnswerBtnClick(){
+    private fun onAnswerBtnClick() {
         detailPresenter.onAnswerBtnClick()
     }
 
@@ -127,9 +120,4 @@ class DetailsFragment : MvpAppCompatFragment(), DetailView{
             return detailsFragment
         }
     }
-
-//    override fun onBackPressed(): Boolean {
-//        detailPresenter.onBackPressed()
-//        return true
-//    }
 }

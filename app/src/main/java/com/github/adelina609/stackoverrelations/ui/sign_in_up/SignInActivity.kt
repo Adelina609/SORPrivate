@@ -9,26 +9,17 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
-import com.github.adelina609.stackoverrelations.App
 import com.github.adelina609.stackoverrelations.R
-import com.github.adelina609.stackoverrelations.di.question.component.DaggerQuestionComponent
-import com.github.adelina609.stackoverrelations.di.question.module.PresenterModule
-import com.github.adelina609.stackoverrelations.di.question.module.QuestionModule
-import com.github.adelina609.stackoverrelations.presenter.SignInPresenter
 import com.github.adelina609.stackoverrelations.ui.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activty_sign_in.*
-import javax.inject.Inject
 
 class SignInActivity : AppCompatActivity(), View.OnClickListener, SignInView {
 
@@ -54,25 +45,17 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, SignInView {
             .build()
 
 
-        mGoogleSignInClient = GoogleSignIn.getClient(this,gso)
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
-
-        // [START initialize_auth]
-        // Initialize Firebase Auth
-        // [END initialize_auth]
     }
 
 
-
     fun signIn(email: String, password: String) {
-        //Log.d(SignInActivity.TAG, "signIn:$email")
         if (!validateForm()) {
             return
         }
-
         showProgressBar()
 
-        // [START sign_in_with_email]
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -94,9 +77,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, SignInView {
                 hideProgressBar()
                 // [END_EXCLUDE]
             }
-        // [END sign_in_with_email]
     }
-
 
 
     // [START on_start_check_user]
@@ -175,11 +156,9 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, SignInView {
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("Login", "signInWithCredential:failure", task.exception)
-                    Toast.makeText(this,"Auth Failed",Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Auth Failed", Toast.LENGTH_LONG).show()
                     updateUI(null)
                 }
-
-                // ...
             }
     }
 
@@ -191,7 +170,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, SignInView {
         progressBar_sign_in.visibility = ProgressBar.INVISIBLE
     }
 
-    override fun displayError(){
+    override fun displayError() {
         Toast.makeText(
             baseContext, "Authentication failed.",
             Toast.LENGTH_SHORT
@@ -214,7 +193,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, SignInView {
     companion object {
         private const val TAG = "SignIn"
 
-        fun newIntent(context: Context?) : Intent{
+        fun newIntent(context: Context?): Intent {
             return Intent(context, SignInActivity::class.java)
         }
     }

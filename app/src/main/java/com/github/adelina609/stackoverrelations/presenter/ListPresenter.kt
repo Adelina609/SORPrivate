@@ -46,7 +46,7 @@ class ListPresenter(private val questionsRepo: QuestionsRepo, private val router
     fun questionClick(id: Int) {
         val idl = id + 0L
         router.navigateTo(Screens.DetailScreen(idl))
-}
+    }
 
     fun onBtnClick() = router.navigateTo(Screens.NewQuestionScreen())
 

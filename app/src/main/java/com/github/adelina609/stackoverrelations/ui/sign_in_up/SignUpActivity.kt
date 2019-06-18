@@ -8,23 +8,17 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.github.adelina609.stackoverrelations.App
 import com.github.adelina609.stackoverrelations.R
 import com.github.adelina609.stackoverrelations.di.question.component.DaggerQuestionComponent
 import com.github.adelina609.stackoverrelations.di.question.module.PresenterModule
 import com.github.adelina609.stackoverrelations.di.question.module.QuestionModule
-import com.github.adelina609.stackoverrelations.presenter.SignUpPresenter
 import com.github.adelina609.stackoverrelations.ui.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_sign_up.*
-import javax.inject.Inject
 
-class SignUpActivity  : AppCompatActivity(), View.OnClickListener, SignUpView {
-
-
+class SignUpActivity : AppCompatActivity(), View.OnClickListener, SignUpView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,6 +82,7 @@ class SignUpActivity  : AppCompatActivity(), View.OnClickListener, SignUpView {
         super.onStart()
         currentUser()
     }
+
     fun validateForm(): Boolean {
         var valid = true
 
@@ -113,44 +108,27 @@ class SignUpActivity  : AppCompatActivity(), View.OnClickListener, SignUpView {
     override fun updateUI(user: FirebaseUser?) {
         hideProgressBar()
         if (user != null) {
-//            status.text = getString(
-//                R.string.emailpassword_status_fmt,
-//                user.email, user.isEmailVerified
-//            )
-            //detail.text = getString(R.string.firebase_status_fmt, user.uid)
-//
-//            emailPasswordButtons.visibility = View.GONE
-//            emailPasswordFields.visibility = View.GONE
-//            signedInButtons.visibility = View.VISIBLE
-//
-//            verifyEmailButton.isEnabled = !user.isEmailVerified
-
             val intent = MainActivity.newIntent(this, user)
             startActivity(intent)
         } else {
-           displayError()
-//            status.setText(R.string.signed_out)
-//            detail.text = null
-//
-//            emailPasswordButtons.visibility = View.VISIBLE
-//            emailPasswordFields.visibility = View.VISIBLE
-//            signedInButtons.visibility = View.GONE
+            displayError()
         }
     }
 
     override fun onClick(v: View) {
         val i = v.id
         when (i) {
-            R.id.btn_register -> createAccount(field_email_signup.text.toString(),
-                field_password_signup.text.toString(), validateForm())
-            R.id.btn_to_signin-> startActivity(
+            R.id.btn_register -> createAccount(
+                field_email_signup.text.toString(),
+                field_password_signup.text.toString(), validateForm()
+            )
+            R.id.btn_to_signin -> startActivity(
                 SignInActivity.newIntent(
                     this
                 )
             )
         }
     }
-
 
 
     override fun showProgressBar() {
@@ -160,13 +138,15 @@ class SignUpActivity  : AppCompatActivity(), View.OnClickListener, SignUpView {
     override fun hideProgressBar() {
         progressBar_sign_up.visibility = ProgressBar.INVISIBLE
     }
+
     override fun displayError() {
         Toast.makeText(
             baseContext, "Authentication failed.",
             Toast.LENGTH_SHORT
         ).show()
     }
-    companion object{
+
+    companion object {
 
         private const val TAG = "SignUp"
 

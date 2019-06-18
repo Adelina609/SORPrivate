@@ -20,7 +20,7 @@ class ProfilePresenter(
     private val STATUS = "status"
     private val USERNAME = "username"
 
-    fun getQuestions(email : String?) {
+    fun getQuestions(email: String?) {
         questionsRepo.getQuestionsByEmail(email)
             .doOnSubscribe {
                 viewState.showProgressBar()
@@ -40,36 +40,34 @@ class ProfilePresenter(
             )
     }
 
-    fun getAnswers(email : String?){
-            answersRepo.
-                getCountAnswersByEmail(email)
-                .doOnSubscribe {
-                    viewState.showProgressBar()
+    fun getAnswers(email: String?) {
+        answersRepo.getCountAnswersByEmail(email)
+            .doOnSubscribe {
+                viewState.showProgressBar()
+            }
+            .doAfterTerminate {
+                viewState.hideProgressBar()
+            }
+            .subscribeBy(
+                onSuccess = {
+                    viewState.setAnswersValue(it.size)
+                },
+                onError =
+                {
+                    viewState.displayError()
                 }
-                .doAfterTerminate {
-                    viewState.hideProgressBar()
-                }
-                .subscribeBy(
-                    onSuccess = {
-                        println("2222222222222222222222222 + getAnsCount profilepres")
-                        viewState.setAnswersValue(it.size)
-                    },
-                    onError =
-                    {
-                        println("2222222222222222222222222 + getAnsCount profilepres" + it.message)
-                        viewState.displayError()
-                    }
-                )
+            )
     }
 
-    fun setUp(){
+    fun setUp() {
         viewState.setTexts(sharedPreferences.getString(USERNAME, USERNAME), sharedPreferences.getString(STATUS, STATUS))
     }
 
-    fun putPhoto(uri : Uri?){
+    fun putPhoto(uri: Uri?) {
         sharedPreferences.edit().putString("photo", uri.toString()).apply()
     }
-    fun goToSettings(){
+
+    fun goToSettings() {
         router.navigateTo(Screens.SharedPreferenceScreen())
     }
 

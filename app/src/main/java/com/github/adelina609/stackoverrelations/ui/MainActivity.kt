@@ -43,10 +43,9 @@ class MainActivity : AppCompatActivity(), MainView {
         setSupportActionBar(main_toolbar as Toolbar?)
 
         navigator.applyCommands(arrayOf<Command>(Replace(Screens.ListScreen())))
-        //TODO btm nav
         bottom_navigation.setOnNavigationItemReselectedListener {
             when(it.itemId){
-                R.id.menu_notifications_item -> print("aaaaaaaaa")
+                R.id.menu_notifications_item -> mainPresenter.goToNotifications()
                 R.id.menu_feed_item -> mainPresenter.goToFeed()
                 R.id.menu_profile_item -> mainPresenter.goToProfile()
             }

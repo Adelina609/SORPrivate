@@ -37,8 +37,10 @@ class NewAnswerFragment : MvpAppCompatFragment(), NewAnswerView {
             .presenterModule(PresenterModule())
             .build()
             .inject(this)
+
         email = arguments?.getString(EXTRA_EMAIL) ?: DEFAULT_EMAIL
         idQuestion = arguments?.getLong(EXTRA_QID) ?: DEFAULT_QID
+
         super.onCreate(savedInstanceState)
     }
 
@@ -46,8 +48,8 @@ class NewAnswerFragment : MvpAppCompatFragment(), NewAnswerView {
         var answer: String = et_describe_fr_add_answer.text.toString()
 
         if (answer != null) {
-            //TODO: EMAIL вводить пользователя!!!!!!!!!!!!! (на предыдуш скрине)
-            newAnswPresenter.onSendBtn(answer, FirebaseAuth.getInstance().currentUser?.email, idQuestion)
+            newAnswPresenter.onSendBtn(answer,
+                FirebaseAuth.getInstance().currentUser?.email, idQuestion)
         } else {
             Toast.makeText(context, getString(R.string.emptyDesc), Toast.LENGTH_SHORT).show()
         }
@@ -66,11 +68,10 @@ class NewAnswerFragment : MvpAppCompatFragment(), NewAnswerView {
 
     private fun setupViews(){
         fr_add_new_answer_progressBar.visibility = ProgressBar.INVISIBLE
-        send_button_fr_add_a.setOnClickListener(View.OnClickListener {
+        send_button_fr_add_a.setOnClickListener {
             sendAnswer()
-        })
+        }
     }
-
 
     override fun displayError() {
         Toast.makeText(context, R.string.server_add_newa_error, Toast.LENGTH_SHORT).show()

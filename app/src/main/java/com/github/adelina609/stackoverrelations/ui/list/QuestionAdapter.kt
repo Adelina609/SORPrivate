@@ -1,13 +1,13 @@
 package com.github.adelina609.stackoverrelations.ui.list
 
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.github.adelina609.stackoverrelations.data.entity.Question
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.github.adelina609.stackoverrelations.R
+import com.github.adelina609.stackoverrelations.data.entity.Question
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.list_item.view.*
 
