@@ -47,7 +47,7 @@ class QuestionAdapter(
 
         fun bind(questionName: String, questionDesc: String) {
             containerView.tv_list_item_name.text = questionName
-            containerView.tv_list_item_description.text = questionDesc
+            containerView.tv_list_item_desc.text = questionDesc
         }
     }
 }

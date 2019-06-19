@@ -20,7 +20,6 @@ class Question(
 ) {
     override fun toString(): String {
         return "$id,$title,$description,$email,"
-               // "$answers;"
     }
 
     override fun equals(other: Any?): Boolean {

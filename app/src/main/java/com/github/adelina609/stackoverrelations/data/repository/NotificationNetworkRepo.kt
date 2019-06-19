@@ -7,7 +7,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class NotificationNetworkRepo(private val sorApi: SorApi) {
-    fun getNotifssByEmail(email : String?) : Single<List<Notification>> =
+
+    fun getNotifsByEmail(email : String?) : Single<List<Notification>> =
         sorApi.getNotifications(email)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

@@ -16,10 +16,4 @@ interface AnswerDao {
 
     @Query("SELECT * FROM answers")
     fun getAnswers(): Single<List<Answer>>
-
-//    @Query("SELECT * FROM answers")
-//    fun getAnswersAndAnswers(): Single<List<QuestionAndAllAnswers>>
-//
-//    @Query("DELETE FROM answers")
-//    fun deleteAnswers()
 }

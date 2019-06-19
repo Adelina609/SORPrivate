@@ -35,14 +35,13 @@ interface SorApi {
     @POST("questions")
     fun addQuestion(@Body question: Question): Single<Question>
 
+    @GET("notifications/{email}")
+    fun getNotifications(@Path("email") email : String?) : Single<List<Notification>>
+
     //добавляет новый ответ
     @POST("questions/{id}/{username}/{uri}")
     fun addAnswerInQuestion(@Body answer: Answer, @Path("id") qId : Long,
                             @Path("username") username: String,
                             @Path("uri") uri: String) : Single<Answer>
-
-    @GET("notifications/{email}")
-    fun getNotifications(@Path("email") email : String?) : Single<List<Notification>>
-
 
 }

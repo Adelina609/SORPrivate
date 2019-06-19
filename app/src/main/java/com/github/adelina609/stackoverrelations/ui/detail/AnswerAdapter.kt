@@ -16,7 +16,7 @@ class AnswerAdapter(
 ) : RecyclerView.Adapter<AnswerAdapter.AnswerHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, type: Int): AnswerHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.answer_list_item, parent, false)
         return AnswerHolder(view)
     }
 
@@ -37,7 +37,6 @@ class AnswerAdapter(
 
         fun bind(answerName: String) {
             containerView.tv_list_item_name.text = answerName
-            containerView.tv_list_item_description.text = "smthhhhh"
         }
     }
 }

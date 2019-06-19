@@ -16,7 +16,7 @@
         tools:text="Title" />
 
     <TextView
-        android:id="@+id/tv_list_item_description"
+        android:id="@+id/tv_list_item_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/secondaryText"
