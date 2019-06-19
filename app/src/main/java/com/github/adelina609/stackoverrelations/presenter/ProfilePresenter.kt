@@ -8,6 +8,7 @@ import com.github.adelina609.stackoverrelations.data.repository.AnswersRepo
 import com.github.adelina609.stackoverrelations.data.repository.QuestionsRepo
 import com.github.adelina609.stackoverrelations.ui.Screens
 import com.github.adelina609.stackoverrelations.ui.profile.ProfileView
+import com.github.adelina609.stackoverrelations.utils.ConstantValues
 import io.reactivex.rxkotlin.subscribeBy
 import ru.terrakok.cicerone.Router
 
@@ -16,9 +17,6 @@ class ProfilePresenter(
     private val questionsRepo: QuestionsRepo, private val router: Router,
     private val answersRepo: AnswersRepo, private val sharedPreferences: SharedPreferences
 ) : MvpPresenter<ProfileView>() {
-
-    private val STATUS = "status"
-    private val USERNAME = "username"
 
     fun getQuestions(email: String?) {
         questionsRepo.getQuestionsByEmail(email)
@@ -60,7 +58,8 @@ class ProfilePresenter(
     }
 
     fun setUp() {
-        viewState.setTexts(sharedPreferences.getString(USERNAME, USERNAME), sharedPreferences.getString(STATUS, STATUS))
+        viewState.setTexts(sharedPreferences.getString(ConstantValues.USERNAME, ConstantValues.USERNAME),
+            sharedPreferences.getString(ConstantValues.STATUS, ConstantValues.STATUS))
     }
 
     fun putPhoto(uri: Uri?) {
