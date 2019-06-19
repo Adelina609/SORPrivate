@@ -23,10 +23,10 @@ import javax.inject.Inject
 class NotificationFragment : MvpAppCompatFragment(), NotificationView {
     @Inject
     @InjectPresenter
-    lateinit var notifPresenter: NotificationPresenter
+    lateinit var notificationPresenter: NotificationPresenter
 
     @ProvidePresenter
-    fun getPresenter(): NotificationPresenter = notifPresenter
+    fun getPresenter(): NotificationPresenter = notificationPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         DaggerQuestionComponent
@@ -45,14 +45,14 @@ class NotificationFragment : MvpAppCompatFragment(), NotificationView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupViews()
-        notifPresenter.getNotifications()
+        notificationPresenter.getNotifications()
         super.onViewCreated(view, savedInstanceState)
     }
 
     override fun displayNotifications(list: List<Notification>) {
         if (rv_notif.adapter == null) {
             rv_notif.adapter = NotificationAdapter(list) {
-                notifPresenter.notifClick(it)
+                notificationPresenter.notifClick(it)
             }
         }
         if (list.isEmpty()) {
@@ -66,7 +66,7 @@ class NotificationFragment : MvpAppCompatFragment(), NotificationView {
         rv_notif.addOnScrollListener(OnScrollListener(
             rv_notif.layoutManager as LinearLayoutManager
         ) {
-            notifPresenter.getNotifications()
+            notificationPresenter.getNotifications()
         })
     }
 

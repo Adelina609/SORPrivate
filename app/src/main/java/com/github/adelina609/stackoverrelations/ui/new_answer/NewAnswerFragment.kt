@@ -22,10 +22,10 @@ import javax.inject.Inject
 class NewAnswerFragment : MvpAppCompatFragment(), NewAnswerView {
     @Inject
     @InjectPresenter
-    lateinit var newAnswPresenter: NewAnswerPresenter
+    lateinit var newAnswerPresenter: NewAnswerPresenter
 
     @ProvidePresenter
-    fun getPresenter(): NewAnswerPresenter = newAnswPresenter
+    fun getPresenter(): NewAnswerPresenter = newAnswerPresenter
 
     private var email : String = ""
     private var idQuestion = 0L
@@ -45,10 +45,10 @@ class NewAnswerFragment : MvpAppCompatFragment(), NewAnswerView {
     }
 
     override fun sendAnswer() {
-        var answer: String = et_describe_fr_add_answer.text.toString()
+        val answer: String = et_describe_fr_add_answer.text.toString()
 
         if (answer != null) {
-            newAnswPresenter.onSendBtn(answer,
+            newAnswerPresenter.onSendBtn(answer,
                 FirebaseAuth.getInstance().currentUser?.email, idQuestion)
         } else {
             Toast.makeText(context, getString(R.string.emptyDesc), Toast.LENGTH_SHORT).show()

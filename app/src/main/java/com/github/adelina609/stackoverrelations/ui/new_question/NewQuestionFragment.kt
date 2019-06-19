@@ -22,10 +22,10 @@ import javax.inject.Inject
 class NewQuestionFragment : MvpAppCompatFragment(), NewQuestionView {
     @Inject
     @InjectPresenter
-    lateinit var npresenter: NewQuestionPresenter
+    lateinit var newQuestionPresenter: NewQuestionPresenter
 
     @ProvidePresenter
-    fun getPresenter(): NewQuestionPresenter = npresenter
+    fun getPresenter(): NewQuestionPresenter = newQuestionPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         DaggerQuestionComponent.builder()
@@ -42,7 +42,7 @@ class NewQuestionFragment : MvpAppCompatFragment(), NewQuestionView {
         val description: String = et_describe_fr_add_q.text.toString()
 
         if (title != null && description != null) {
-            npresenter.onSendBtn(title, description, FirebaseAuth.getInstance().currentUser?.email)
+            newQuestionPresenter.onSendBtn(title, description, FirebaseAuth.getInstance().currentUser?.email)
         } else {
             Toast.makeText(context, getString(R.string.emptyTitleOrDesc), Toast.LENGTH_SHORT).show()
         }

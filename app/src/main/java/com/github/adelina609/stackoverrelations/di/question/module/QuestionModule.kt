@@ -13,13 +13,10 @@ class QuestionModule {
     @Provides
     @QuestionScope
     fun provideQuestionsRepo(
-        questionsDBRepo: QuestionsDBRepo,
         questionsNetworkRepo: QuestionsNetworkRepo
-    ): QuestionsRepo = QuestionsRepo(
-        questionsDBRepo, questionsNetworkRepo,
+    ): QuestionsRepo = QuestionsRepo(questionsNetworkRepo,
         providePagination()
     )
-    //, answersDBRepo)
 
     @Provides
     @QuestionScope
@@ -35,8 +32,4 @@ class QuestionModule {
     @QuestionScope
     fun provideNotifNetworkRepo(sorApi: SorApi) : NotificationNetworkRepo =
         NotificationNetworkRepo(sorApi)
-
-    @Provides
-    @QuestionScope
-    fun provideQuestionsDBRepo(questionDao: QuestionDao): QuestionsDBRepo = QuestionsDBRepo(questionDao)
 }

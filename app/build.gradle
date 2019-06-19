@@ -101,6 +101,7 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:4.3.2'
     //other
     implementation 'com.pkmmte.view:circularimageview:1.1'
+
 //    implementation 'androidx.core:core-ktx:1.2.0-alpha02'
     //preferences
     implementation 'androidx.preference:preference:1.0.0'

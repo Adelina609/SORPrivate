@@ -4,7 +4,6 @@ import com.github.adelina609.stackoverrelations.data.entity.Answer
 import io.reactivex.Single
 
 class AnswersRepo(
-    private val answersDBRepo: AnswersDBRepo,
     private val answersNetworkRepo: AnswersNetworkRepo
 ) {
 

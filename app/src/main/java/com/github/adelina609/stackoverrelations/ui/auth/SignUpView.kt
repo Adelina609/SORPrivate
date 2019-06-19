@@ -4,7 +4,6 @@ import com.arellomobile.mvp.MvpView
 import com.google.firebase.auth.FirebaseUser
 
 interface SignUpView : MvpView{
-
     fun displayError()
     fun showProgressBar()
     fun hideProgressBar()

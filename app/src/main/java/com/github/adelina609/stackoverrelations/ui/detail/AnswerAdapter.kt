@@ -3,8 +3,6 @@ package com.github.adelina609.stackoverrelations.ui.detail
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.github.adelina609.stackoverrelations.R
 import com.github.adelina609.stackoverrelations.data.entity.Answer
@@ -16,7 +14,8 @@ class AnswerAdapter(
 ) : RecyclerView.Adapter<AnswerAdapter.AnswerHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, type: Int): AnswerHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.answer_list_item, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.answer_list_item, parent, false)
         return AnswerHolder(view)
     }
 
