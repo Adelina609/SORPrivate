@@ -24,7 +24,7 @@ class Notification
     @SerializedName("photo")
     var photo: String,
 
-    @SerializedName("question")
+    @SerializedName("question_id")
     var question_id: Int
 ) {
     override fun equals(other: Any?): Boolean {

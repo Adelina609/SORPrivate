@@ -29,10 +29,9 @@ class NotificationAdapter(
     }
 
     override fun onBindViewHolder(holder: NotificationHolder, position: Int) {
-        var uri : Uri = Uri.parse(notifications[position].photo)
+        val uri : Uri = Uri.parse(notifications[position].photo)
         holder.bind(notifications[position].notification, uri)
         val id = notifications[position].question_id
-        println("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO" + notifications[position])
         holder.itemView.setOnClickListener {
             notificationLambda.invoke(id)
         }

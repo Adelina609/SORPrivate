@@ -17,7 +17,7 @@ class NotificationPresenter(
 
     fun getNotifications() {
         val email = FirebaseAuth.getInstance().currentUser?.email
-        notificationNetworkRepo.getAnswersByEmail(email)
+        notificationNetworkRepo.getNotifssByEmail(email)
             .doOnSubscribe {
                 viewState.showProgressBar()
             }

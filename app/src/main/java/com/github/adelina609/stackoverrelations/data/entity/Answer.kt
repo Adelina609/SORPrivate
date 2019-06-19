@@ -25,7 +25,6 @@ class Answer(
     var dislikes: Int,
 
     @SerializedName("question")
-//    @Embedded(prefix = "question")
     @ColumnInfo(name = "question_id")
     var question_id : Int
 ){
