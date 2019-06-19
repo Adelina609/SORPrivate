@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity(), MainView {
                 .inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(main_toolbar as Toolbar)
 
         navigator.applyCommands(arrayOf<Command>(Replace(Screens.ListScreen())))
         bottom_navigation.setOnNavigationItemSelectedListener {

@@ -11,54 +11,45 @@ import ru.terrakok.cicerone.Router
 
 @InjectViewState
 class DetailPresenter(
-    private val questionsRepo: QuestionsRepo, private val router: Router,
-    private val answersRepo: AnswersRepo
+        private val questionsRepo: QuestionsRepo,
+        private val router: Router,
+        private val answersRepo: AnswersRepo
 ) : MvpPresenter<DetailView>() {
 
     var qId: Long = 0L
+
     fun getQuestion(id: Long) {
         questionsRepo.getQuestion(id)
-            .doOnSubscribe {
-                viewState.showProgressBar()
-            }
-            .doAfterTerminate {
-                viewState.hideProgressBar()
-            }
-            .subscribeBy(
-                onSuccess = {
+                .doOnSubscribe { viewState.showProgressBar() }
+                .doAfterTerminate { viewState.hideProgressBar() }
+                .subscribeBy(onSuccess = {
                     qId = it.id + 0L
                     viewState.displayQuestion(it)
-                },
-                onError =
+                }, onError =
                 {
                     viewState.displayError()
                 }
-            )
+                )
     }
 
     fun getAnswers(offset: Int, id: Long) {
         answersRepo.getAnswers(offset, id)
-            .doOnSubscribe {
-                viewState.showProgressBar()
-            }
-            .doAfterTerminate {
-                viewState.hideProgressBar()
-            }
-            .subscribeBy(
-                onSuccess = {
+                .doOnSubscribe { viewState.showProgressBar() }
+                .doAfterTerminate { viewState.hideProgressBar() }
+                .subscribeBy(onSuccess = {
                     if (it.isEmpty()) {
                         if (offset != offsetDefault) {
                             viewState.detachOnScrollListeners()
                         }
+                        viewState.hideAnswers()
                     } else {
                         viewState.displayAnswers(it)
                         viewState.displaySuccess()
                     }
-                },
-                onError = {
+                }, onError = {
                     viewState.displayError()
                 }
-            )
+                )
     }
 
     //fun onBackPressed() = router.newRootScreen(Screens.ListScreen())

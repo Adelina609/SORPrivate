@@ -40,10 +40,11 @@
         android:layout_marginTop="16dp"
         android:text="@string/answers"
         android:textColor="@color/secondaryText"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_details_details_activity" />
-
+        app:layout_constraintTop_toBottomOf="@id/tv_details_details_activity"
+        tools:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_answers"

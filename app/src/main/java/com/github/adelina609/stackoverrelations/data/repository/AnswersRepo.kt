@@ -15,14 +15,7 @@ class AnswersRepo(
     }
 
     fun getAnswers(offset: Int, id: Long): Single<List<Answer>> {
-        if (isFirst) {
-            isFirst = false
             return getAnswersFromNetwork(offset, id)
-        }
-        if (offset > 0) {
-            return getAnswersFromNetwork(offset, id)
-        }
-        return getAnswersFromDB()
     }
 
     private fun getAnswersFromNetwork(offset: Int, id: Long): Single<List<Answer>> {

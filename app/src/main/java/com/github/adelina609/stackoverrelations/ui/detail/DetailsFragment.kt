@@ -23,63 +23,72 @@ import kotlinx.android.synthetic.main.fragment_list.*
 import javax.inject.Inject
 
 class DetailsFragment : MvpAppCompatFragment(), DetailView {
+
     @Inject
     @InjectPresenter
     lateinit var detailPresenter: DetailPresenter
 
-    private var idQuestion = 0L
-
     @ProvidePresenter
     fun getPresenter(): DetailPresenter = detailPresenter
 
+    private var adapter: AnswerAdapter? = null
+    private var idQuestion = 0L
+
     override fun onCreate(savedInstanceState: Bundle?) {
         DaggerQuestionComponent.builder()
-            .appComponent(App.getAppComponents())
-            .questionModule(QuestionModule())
-            .answerModule(AnswerModule())
-            .presenterModule(PresenterModule())
-            .build()
-            .inject(this)
+                .appComponent(App.getAppComponents())
+                .questionModule(QuestionModule())
+                .answerModule(AnswerModule())
+                .presenterModule(PresenterModule())
+                .build()
+                .inject(this)
         idQuestion = arguments?.getLong(EXTRA_ID) ?: DEFAULT_ID
         super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_details, container, false)
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_details, container, false)
+        detailPresenter.getQuestion(idQuestion)
+        detailPresenter.getAnswers(0, idQuestion)
+        return view
+    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        detailPresenter.getQuestion(idQuestion)
-        detailPresenter.getAnswers(0, idQuestion)
         setupViews()
     }
 
     private fun setupViews() {
         rv_answers.layoutManager = LinearLayoutManager(context)
         rv_answers.addOnScrollListener(OnScrollListener(
-            rv_answers.layoutManager as LinearLayoutManager
+                rv_answers.layoutManager as LinearLayoutManager
         ) {
             detailPresenter.getAnswers(it, idQuestion)
         })
-        btn_answer.setOnClickListener {
-            onAnswerBtnClick()
-        }
+        adapter = AnswerAdapter(emptyList())
+        rv_answers.adapter = adapter
+        btn_answer.setOnClickListener { onAnswerBtnClick() }
     }
 
     private fun onAnswerBtnClick() {
         detailPresenter.onAnswerBtnClick()
     }
 
-
     override fun displayAnswers(listAnswer: List<Answer>) {
-        if (rv_answers.adapter == null) {
-            rv_answers.adapter = AnswerAdapter(listAnswer) {
-            }
+        adapter?.also {
+            it.updateDataSet(listAnswer)
+            tv_answers_title.visibility = View.VISIBLE
+            rv_answers.visibility = View.VISIBLE
         }
-        (rv_answers.adapter as AnswerAdapter).submitList(listAnswer)
+    }
+
+    override fun hideAnswers() {
+        tv_answers_title.visibility = View.GONE
+        rv_answers.visibility = View.GONE
     }
 
     override fun displayQuestion(question: Question) {

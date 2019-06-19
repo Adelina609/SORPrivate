@@ -12,9 +12,8 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.list_item.view.*
 
 class AnswerAdapter(
-    private val answers: List<Answer>,
-    private val answerLambda: (Int) -> Unit
-) : ListAdapter<Answer, AnswerAdapter.AnswerHolder>(AnswerDiffCallback()) {
+        private var answers: List<Answer>
+) : RecyclerView.Adapter<AnswerAdapter.AnswerHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, type: Int): AnswerHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
@@ -25,24 +24,16 @@ class AnswerAdapter(
 
     override fun onBindViewHolder(holder: AnswerHolder, position: Int) {
         holder.bind(answers[position].answer)
-        holder.itemView.setOnClickListener {
-            answerLambda.invoke(position)
-        }
     }
 
-    override fun submitList(list: List<Answer>?) {
-        super.submitList(if (list != null) ArrayList(list) else null)
+    fun updateDataSet(list: List<Answer>) {
+        answers = list
+        notifyDataSetChanged()
     }
 
-    class AnswerDiffCallback : DiffUtil.ItemCallback<Answer>() {
-        override fun areItemsTheSame(oldItem: Answer, newItem: Answer): Boolean = oldItem.answer == newItem.answer
-
-        override fun areContentsTheSame(oldItem: Answer, newItem: Answer): Boolean = oldItem == newItem
-
-    }
-
-    class AnswerHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
-        LayoutContainer {
+    class AnswerHolder(
+            override val containerView: View
+    ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         fun bind(answerName: String) {
             containerView.tv_list_item_name.text = answerName
