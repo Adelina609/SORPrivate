@@ -1,4 +1,4 @@
-# StackOverRelations
+# Forum App
 
 Android app with social media elements.
 
